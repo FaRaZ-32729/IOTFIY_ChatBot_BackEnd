@@ -1,0 +1,35 @@
+{
+  "name": "nucleus-chatbot-backend",
+  "version": "1.0.0",
+  "description": "Backend for IoTFIY Chatbot",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.3.0",
+    "@langchain/classic": "^1.0.32",
+    "@langchain/core": "^1.1.46",
+    "@langchain/google-genai": "^2.1.30",
+    "@langchain/textsplitters": "^1.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "google-tts-api": "^0.0.6",
+    "helmet": "^8.0.0",
+    "langchain": "^1.4.0",
+    "mindee": "^5.3.0",
+    "mongoose": "^8.9.2",
+    "morgan": "^1.10.0",
+    "mqtt": "^5.15.1",
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.77.0",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^4.2.67",
+    "pngjs": "^7.0.0",
+    "uuid": "^11.0.3",
+    "ws": "^8.20.1"
+  }
+}
