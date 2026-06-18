@@ -36,13 +36,16 @@ router.post("/", async (req, res, next) => {
 /**
  * GET /api/leads — List all leads (for analytics dashboard)
  */
-router.get("/", async (_req, res, next) => {
+router.get("/all", async (_req, res, next) => {
   try {
     const leads = await Lead.find()
-      .sort({ createdAt: -1 })
-      .limit(200)
-      .lean();
-    res.json({ success: true, leads });
+      .sort({ createdAt: -1 });
+
+    if (leads.length === 0) {
+      return res.status(404).json({ message: "no leads found" });
+    }
+
+    return res.json({ success: true, leads });
   } catch (err) {
     next(err);
   }
