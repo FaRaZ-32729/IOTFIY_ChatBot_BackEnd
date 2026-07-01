@@ -247,6 +247,180 @@ async function pollJobAndFetchResult({ apiKey, jobId, mindeeClient, maxRetries =
  *
  * Uses Mindee SDK with PathInput for visiting-card OCR.
  */
+// router.post("/", async (req, res) => {
+//   console.log("\n========== Card Scan Request (SDK PathInput) ==========");
+
+//   await fs.mkdir(uploadDir, { recursive: true });
+//   let tempFilePath = null;
+
+//   try {
+//     // 1. Process Multipart upload
+//     await new Promise((resolve, reject) => {
+//       upload.single("image")(req, res, (err) => (err ? reject(err) : resolve()));
+//     });
+
+//     const file = req.file;
+//     if (!file?.path) {
+//       return res.status(400).json({ success: false, error: "No image file provided." });
+//     }
+
+//     if (!file.size || file.size <= 0) {
+//       return res.status(400).json({ success: false, error: "Uploaded image is empty." });
+//     }
+
+//     tempFilePath = file.path;
+
+//     const apiKey = String(process.env.MINDEE_API_KEY || "").trim();
+//     const modelId = String(process.env.MINDEE_MODEL_ID || "").trim();
+//     const mindeeClient = new Client({ apiKey });
+
+//     if (!apiKey || !modelId) {
+//       throw new Error("MINDEE_API_KEY or MINDEE_MODEL_ID missing from .env");
+//     }
+
+//     console.log(`Uploaded file path: ${tempFilePath} (size=${file.size} bytes, mime=${file.mimetype || "unknown"})`);
+
+//     // 2. Send to Mindee SDK for extraction
+//     console.log("Sending to Mindee SDK for processing...");
+//     let response;
+//     try {
+//       response = await runMindeeExtractionWithSdk({ mindeeClient, modelId, inputPath: tempFilePath });
+//     } catch (sdkErr) {
+//       const sdkMsg = sdkErr?.message || "Unknown SDK error";
+//       console.warn("SDK extraction failed, switching to direct HTTP enqueue+poll:", sdkMsg);
+
+//       const jobId = await enqueueViaHttp({
+//         apiKey,
+//         modelId,
+//         filePath: tempFilePath,
+//         mimeType: file.mimetype,
+//         filename: file.originalname || path.basename(tempFilePath),
+//       });
+//       response = await pollJobAndFetchResult({ apiKey, jobId, mindeeClient });
+//     }
+
+//     // 3. Extract data from response
+//     const prediction = toPredictionObject(response);
+
+//     const allFields = extractAllFields(prediction);
+//     console.log(`Extracted ${allFields.length} field(s) via SDK`);
+
+//     const rawDisplayText = typeof response?.inference?.toString === "function"
+//       ? response.inference.toString()
+//       : "";
+//     let cardData = mapToCardData(allFields);
+
+//     if (!cardData.firstName && !cardData.lastName && cardData.fullName) {
+//       const parts = cardData.fullName.trim().split(/\s+/);
+//       cardData.firstName = parts[0] || "";
+//       cardData.lastName = parts.slice(1).join(" ") || "";
+//     }
+
+//     let fieldList = allFields.length > 0
+//       ? allFields
+//       : Object.entries(cardData)
+//         .filter(([, v]) => v)
+//         .map(([key, value]) => ({ key, label: labelFromKey(key), value }));
+
+//     let summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
+//     const fallbackData = parseCardTextFallback(`${summaryText}\n${rawDisplayText}`);
+//     cardData = mergeCardData(cardData, fallbackData);
+
+//     const fallbackFields = Object.entries(cardData)
+//       .filter(([, value]) => value)
+//       .map(([key, value]) => ({ key, label: labelFromKey(key), value }));
+
+//     // if (fallbackFields.length > fieldList.length) {
+//     //   fieldList = fallbackFields;
+//     //   summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
+//     // }
+
+//     // if (!summaryText.trim()) {
+//     //   return res.json({
+//     //     success: true,
+//     //     data: {
+//     //       ...cardData,
+//     //       text: "",
+//     //       displayText: "No data could be extracted. Try a clearer photo.",
+//     //       fields: [],
+//     //     },
+//     //   });
+//     // }
+
+//     // console.log("✅ SDK Extraction successful!");
+
+//     // res.json({
+//     //   success: true,
+//     //   data: {
+//     //     ...cardData,
+//     //     text: summaryText,
+//     //     displayText: summaryText,
+//     //     fields: fieldList,
+//     //   },
+//     // });
+
+//     if (fallbackFields.length > fieldList.length) {
+//       fieldList = fallbackFields;
+//       summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
+//     }
+
+//     // ✅ NEW: consider it "no data" if none of the essential fields exist
+//     const hasMeaningfulData = Boolean(
+//       cardData.fullName ||
+//       cardData.firstName ||
+//       cardData.lastName ||
+//       cardData.phone ||
+//       cardData.email
+//     );
+
+//     if (!summaryText.trim() || !hasMeaningfulData) {
+//       return res.json({
+//         success: true,
+//         data: {
+//           ...cardData,
+//           text: summaryText || "",
+//           displayText: "No data could be extracted. Try a clearer photo.",
+//           fields: fieldList,
+//           noData: true,          // 👈 explicit flag
+//         },
+//       });
+//     }
+
+//     console.log("✅ SDK Extraction successful!");
+
+//     res.json({
+//       success: true,
+//       data: {
+//         ...cardData,
+//         text: summaryText,
+//         displayText: summaryText,
+//         fields: fieldList,
+//         noData: false,          // 👈 explicit flag
+//       },
+//     });
+
+//   } catch (error) {
+//     console.error("❌ Card scan error:", error?.message || error);
+//     if (error?.stack) {
+//       console.error(error.stack);
+//     }
+//     res.status(500).json({
+//       success: false,
+//       error: `Mindee OCR failed: ${error.message || "Unknown error"}`,
+//     });
+//   } finally {
+//     // 4. Cleanup temp file
+//     if (tempFilePath) {
+//       try {
+//         await fs.unlink(tempFilePath);
+//         console.log(`Cleaned up temp file: ${tempFilePath}`);
+//       } catch (cleanupErr) {
+//         console.warn(`Failed to cleanup temp file ${tempFilePath}:`, cleanupErr.message);
+//       }
+//     }
+//   }
+// });
+
 router.post("/", async (req, res) => {
   console.log("\n========== Card Scan Request (SDK PathInput) ==========");
 
@@ -301,13 +475,10 @@ router.post("/", async (req, res) => {
 
     // 3. Extract data from response
     const prediction = toPredictionObject(response);
-    
+
     const allFields = extractAllFields(prediction);
     console.log(`Extracted ${allFields.length} field(s) via SDK`);
 
-    const rawDisplayText = typeof response?.inference?.toString === "function"
-      ? response.inference.toString()
-      : "";
     let cardData = mapToCardData(allFields);
 
     if (!cardData.firstName && !cardData.lastName && cardData.fullName) {
@@ -316,39 +487,58 @@ router.post("/", async (req, res) => {
       cardData.lastName = parts.slice(1).join(" ") || "";
     }
 
-    let fieldList = allFields.length > 0 
-      ? allFields 
-      : Object.entries(cardData)
-          .filter(([, v]) => v)
-          .map(([key, value]) => ({ key, label: labelFromKey(key), value }));
+    let fieldList = allFields.length > 0
+      ? allFields
+      : [];
 
     let summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
-    const fallbackData = parseCardTextFallback(`${summaryText}\n${rawDisplayText}`);
-    cardData = mergeCardData(cardData, fallbackData);
 
-    const fallbackFields = Object.entries(cardData)
-      .filter(([, value]) => value)
-      .map(([key, value]) => ({ key, label: labelFromKey(key), value }));
+    // ✅ FIX: Only run the regex-based fallback parser when the SDK actually
+    // returned real fields. response.inference.toString() (rawDisplayText)
+    // was being fed in here previously — when Mindee found nothing, that
+    // string contains schema/placeholder text (e.g. ":company:", sample
+    // names) which the regex fallback happily misread as real card data.
+    // That's why empty scans were producing fake name/phone/company values.
+    if (allFields.length > 0 && summaryText.trim()) {
+      const fallbackData = parseCardTextFallback(summaryText);
+      cardData = mergeCardData(cardData, fallbackData);
 
-    if (fallbackFields.length > fieldList.length) {
-      fieldList = fallbackFields;
-      summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
+      const fallbackFields = Object.entries(cardData)
+        .filter(([, value]) => value)
+        .map(([key, value]) => ({ key, label: labelFromKey(key), value }));
+
+      if (fallbackFields.length > fieldList.length) {
+        fieldList = fallbackFields;
+        summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
+      }
     }
 
-    if (!summaryText.trim()) {
+    // ✅ Consider it "no data" if none of the essential fields exist,
+    // or if the SDK never found any fields at all.
+    const hasMeaningfulData = Boolean(
+      cardData.fullName ||
+      cardData.firstName ||
+      cardData.lastName ||
+      cardData.phone ||
+      cardData.email
+    );
+
+    if (allFields.length === 0 || !summaryText.trim() || !hasMeaningfulData) {
+      console.log("⚠️ No usable data extracted — reporting noData to client.");
       return res.json({
         success: true,
         data: {
           ...cardData,
-          text: "",
+          text: summaryText || "",
           displayText: "No data could be extracted. Try a clearer photo.",
-          fields: [],
+          fields: fieldList,
+          noData: true, // 👈 explicit flag
         },
       });
     }
 
     console.log("✅ SDK Extraction successful!");
-    
+
     res.json({
       success: true,
       data: {
@@ -356,6 +546,7 @@ router.post("/", async (req, res) => {
         text: summaryText,
         displayText: summaryText,
         fields: fieldList,
+        noData: false, // 👈 explicit flag
       },
     });
 
