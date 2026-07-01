@@ -8,10 +8,10 @@ import http from "http";
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
 import { initializePdfContext } from "./services/pdfService.js";
-import chatRoutes from "./routes/chatRoutes.js";
 import cardScanRoutes from "./routes/cardScanRoutes.js";
 import leadRoutes from "./routes/leadRoutes.js";
 import { createLiveWebSocketServer } from "./ws/liveWebSocketServer.js";
+import { sendAngle } from "./mqtt/mqttPublisher.js";
 
 dotenv.config();
 
@@ -29,7 +29,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://iotfiy-chatbot.vercel.app",
+    origin: process.env.FRONTEND_URL || "https://iotfiy-chatbot.vercel.app" || "http://localhost:5174" || "http://localhost:5173",
     credentials: true,
   })
 );
@@ -48,27 +48,25 @@ app.use(
 );
 
 /* ───────── Routes ───────── */
-app.use("/api/chat", chatRoutes);
 app.use("/api/card-scan", cardScanRoutes);
 app.use("/api/leads", leadRoutes);
 app.use("/api/images", (await import("./routes/imageRoutes.js")).default);
-
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 //faraz don't remove this commented code
-// app.post('/send-angle', (req, res) => {
-//   const { angle } = req.body;
-//   console.log("📥 Backend received angle:", angle);
-//   if (typeof angle === 'number') {
-//     sendAngle(angle);
-//     console.log("sending data to mqtt")
-//     return res.json({ success: true, angle });
-//   } else {
-//     return res.status(400).json({ error: "Angle number mein hona chahiye" });
-//   }
-// });
+app.post('/send-angle', (req, res) => {
+  const { angle } = req.body;
+  console.log("📥 Backend received angle:", angle);
+  if (typeof angle === 'number') {
+    sendAngle(angle);
+    console.log("sending data to mqtt")
+    return res.json({ success: true, angle });
+  } else {
+    return res.status(400).json({ error: "Angle number mein hona chahiye" });
+  }
+});
 
 /* ───────── Global Error Handler ───────── */
 app.use((err, _req, res, _next) => {

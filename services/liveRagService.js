@@ -8,6 +8,7 @@
 import { retrieveContextAndImages } from "./geminiService.js";
 import { getImageMetadata } from "./pdfService.js";
 
+
 const pendingBySession = new Map();
 const utteranceBySession = new Map();
 const lastQueryBySession = new Map();
@@ -22,73 +23,59 @@ function tokenize(value) {
     .filter((token) => token.length > 2);
 }
 
+
+function normalizeKey(str) {
+  return String(str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
 function sourceBoost(query, entry) {
-  const q = String(query || "").toLowerCase().replace(/\s+/g, "");
-  const hay = [
-    entry.topic,
-    entry.image_path,
-    entry.pdf_name,
-    entry.pdfName,
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase()
-    .replace(/\s+/g, "");
+  const q = normalizeKey(query);
+  if (!q) return 0;
+
+  const pdfKey = normalizeKey(entry.pdf_name);   // e.g. "easysolar", "iotfiygateway"
+  const topic = normalizeKey(entry.topic);
+
+  if (!pdfKey) return 0;
 
   let score = 0;
-  if (/mushaba|moshaba|mashaba/.test(q) && hay.includes("mushaba")) score += 100;
-  if (/iotfiysolutions|solutionsdocument|iotfiydocument|iotfiycompany|aboutiotfiy/.test(q) &&
-      /iotfiy_solutions_document|iotfiysolutionsdocument/.test(hay)) {
-    score += 110;
+
+  if (pdfKey === q) score += 200;                          // exact: "easy_solar" === "easysolar"
+  else if (pdfKey.includes(q) || q.includes(pdfKey)) score += 150;  // partial: "iotfiy" inside "iotfiygateway"
+  else {
+    const qWords = tokenize(query);
+    const hayWords = tokenize(`${entry.pdf_name || ""} ${entry.topic || ""}`);
+    const overlap = qWords.filter((w) => hayWords.includes(w)).length;
+    if (overlap > 0) score += overlap * 30;
   }
-  if (/iotfiy/.test(q) && /iotfiy_solutions_document|iotfiysolutionsdocument/.test(hay)) score += 50;
-  if (/nucleus|distribution/.test(q) && hay.includes("nucleus")) score += 80;
-  if (/vivanco|vericom|cable|datacenter|infrastructure|turnkey/.test(q) &&
-      /nucleus|vivanco|vericom|cable|datacenter|infrastructure|turnkey/.test(hay)) {
-    score += 70;
-  }
+
   return score;
 }
+
 
 function localImagesForQuery(query, limit = 8) {
   const entries = getImageMetadata();
   if (!Array.isArray(entries) || !entries.length || !query?.trim()) return [];
 
-  const queryTokens = new Set(tokenize(query));
   const scored = [];
 
   for (const entry of entries) {
-    const haystack = [
-      entry.topic,
-      entry.image_path,
-      entry.pdf_name,
-      entry.pdfName,
-    ].filter(Boolean).join(" ");
+    const score = sourceBoost(query, entry);
 
-    const hayTokens = new Set(tokenize(haystack));
-    let score = sourceBoost(query, entry);
-
-    for (const token of queryTokens) {
-      if (hayTokens.has(token)) score += 25;
+    if (score > 50) {
+      const imagePath = String(entry.image_path || "").replace(/^[/\\]+/, "");
+      if (!imagePath) continue;
+      scored.push({
+        score,
+        image: {
+          topic: entry.topic || "",
+          image_path: imagePath,
+          url: `/${imagePath}`,
+          page_number: entry.page_number || null,
+          pdf_name: entry.pdf_name || "",
+          alt: entry.topic || "Related image",
+        },
+      });
     }
-
-    if (score <= 0) continue;
-
-    const imagePath = String(entry.image_path || entry.relativePath || "")
-      .replace(/^[/\\]+/, "");
-    if (!imagePath) continue;
-
-    scored.push({
-      score,
-      image: {
-        topic: entry.topic || "",
-        image_path: imagePath,
-        url: `/${imagePath}`,
-        page_number: entry.page_number || entry.pageNumber || null,
-        pdf_name: entry.pdf_name || entry.pdfName || "",
-        alt: entry.topic || "Related image",
-      },
-    });
   }
 
   scored.sort((a, b) => b.score - a.score);
@@ -102,6 +89,7 @@ function localImagesForQuery(query, limit = 8) {
     if (unique.length >= limit) break;
   }
 
+  console.log(`🔍 LOCAL SEARCH: Query = "${query}" | Found ${unique.length} images`);
   return unique;
 }
 
@@ -128,11 +116,11 @@ function detectQueryFocus(text) {
     return "mushaba";
   }
   if (/iotfiy\s*solutions|solutions\s*document|iotfiy\s*document|about\s*iotfiy/i.test(lower) ||
-      /iotfiysolutions|solutionsdocument|iotfiydocument|aboutiotfiy/.test(stripped)) {
+    /iotfiysolutions|solutionsdocument|iotfiydocument|aboutiotfiy/.test(stripped)) {
     return "iotfiy_solutions";
   }
   if (/nucleus|vivanco|distribution|cable|vericom|data\s*center/i.test(lower) ||
-      /nucleus|distribution/.test(stripped)) {
+    /nucleus|distribution/.test(stripped)) {
     return "nucleus";
   }
   return null;
@@ -162,18 +150,26 @@ function debounceRag(sessionId, fn, delayMs = 700) {
  * Unlike previous versions, this uses only the LATEST user query text
  * (replaced, not accumulated) so images match the current topic.
  */
+const GREETING_OR_GENERIC = /^(hello|hi|hey|salam|assalam|ok|okay|yes|no|thanks|thank you)\b/i;
 export function enrichQueryForLive(
   sessionId,
   query,
   { onImages }
 ) {
-  if (!query || query.trim().length < 3) return;
+  if (!query || query.trim().length < 2) return;
 
   const trimmed = query.trim();
+
+  if (GREETING_OR_GENERIC.test(trimmed) && trimmed.length < 20) {
+    console.log(`⏭️  Skipping image search for greeting/generic: "${trimmed}"`);
+    return;
+  }
+
   const instantImages = localImagesForQuery(trimmed, 8);
   if (instantImages.length) {
     console.log(`Images [LOCAL] Found ${instantImages.length} immediate image(s) for: "${trimmed.slice(0, 80)}"`);
     onImages?.(instantImages);
+    return;
   }
 
   const focus = detectQueryFocus(trimmed);
@@ -195,24 +191,30 @@ export function enrichQueryForLive(
   if (focus) {
     lastQueryBySession.set(sessionId, focus);
   }
-
+  
   debounceRag(sessionId, async () => {
     const utterance = utteranceBySession.get(sessionId);
     if (!utterance?.text) return;
 
     try {
       console.log(`🖼️  [RAG] Searching images for: "${utterance.text.slice(0, 80)}"`);
-      const { context, imageUrls, relatedImages } = await withTimeout(
+
+      const result = await withTimeout(
         retrieveContextAndImages(utterance.text),
-        LIVE_RAG_TIMEOUT_MS
+        8000
+        // LIVE_RAG_TIMEOUT_MS
       );
+
+      // FIXED: Proper destructuring with default values
+      const { context = "", imageUrls = [], relatedImages = [] } = result || {};
+
       const payload = relatedImages?.length ? relatedImages : imageUrls;
 
       if (payload?.length) {
         console.log(`🖼️  [RAG] Found ${payload.length} images`);
         onImages?.(payload);
       } else {
-        console.log(`🖼️  [RAG] No images found for topic, keeping existing visuals on screen.`);
+        console.log(`🖼️  [RAG] No images found for topic.`);
       }
     } catch (err) {
       console.error("Live RAG error:", err.message);

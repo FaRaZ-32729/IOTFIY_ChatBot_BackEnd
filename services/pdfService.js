@@ -126,45 +126,102 @@ function buildTextLines(textContent) {
     .filter((entry) => entry.line.length > 0);
 }
 
+// function scoreTopicCandidate(text) {
+//   const cleaned = String(text || "").replace(/\s+/g, " ").trim();
+//   if (!cleaned || cleaned.length < 4 || cleaned.length > TOPIC_MAX_LEN) return 0;
+//   if (/^(page|chapter|section)?\s*\d+\b/i.test(cleaned)) return 0;
+//   if (/table of contents|contents|index/i.test(cleaned)) return 0;
+
+//   const words = cleaned.split(" ");
+//   let score = words.length;
+//   if (words.length >= 3 && words.length <= 12) score += 8;
+//   if (/^[A-Z]/.test(cleaned)) score += 2;
+//   if (/[A-Za-z]{3,}/.test(cleaned)) score += 2;
+//   return score;
+// }
+
 function scoreTopicCandidate(text) {
   const cleaned = String(text || "").replace(/\s+/g, " ").trim();
-  if (!cleaned || cleaned.length < 4 || cleaned.length > TOPIC_MAX_LEN) return 0;
-  if (/^(page|chapter|section)?\s*\d+\b/i.test(cleaned)) return 0;
-  if (/table of contents|contents|index/i.test(cleaned)) return 0;
+  if (!cleaned || cleaned.length < 5 || cleaned.length > TOPIC_MAX_LEN) return 0;
+  if (/^(page|chapter|section|figure|table)?\s*\d+\b/i.test(cleaned)) return 0;
+  if (/table of contents|contents|index|footer|header/i.test(cleaned)) return 0;
 
-  const words = cleaned.split(" ");
-  let score = words.length;
-  if (words.length >= 3 && words.length <= 12) score += 8;
-  if (/^[A-Z]/.test(cleaned)) score += 2;
-  if (/[A-Za-z]{3,}/.test(cleaned)) score += 2;
+  const words = cleaned.split(" ").filter(w => w.length > 1);
+  let score = words.length * 2;
+
+  if (words.length >= 2 && words.length <= 12) score += 15;
+  if (/^[A-Z]/.test(cleaned)) score += 10;
+  if (cleaned.includes("IoT") || cleaned.includes("IOT") || /Mushaba|Nucleus|Distribution/i.test(cleaned)) score += 25;
+
   return score;
 }
 
+
+// function extractTopicFromPage(textContent, pageText, fallbackTopic, pageNumber) {
+//   const lines = buildTextLines(textContent).slice(0, 6);
+//   let best = "";
+//   let bestScore = 0;
+
+//   for (const { line } of lines) {
+//     const score = scoreTopicCandidate(line);
+//     if (score > bestScore) {
+//       bestScore = score;
+//       best = line;
+//     }
+//   }
+
+//   if (!best && pageText) {
+//     const sentence = pageText.split(/[\.!?]/)[0] || "";
+//     const fallback = sentence || pageText;
+//     best = fallback.split(" ").slice(0, 14).join(" ");
+//   }
+
+//   const normalized = normalizeTopicLabel(best);
+//   if (normalized) return normalized;
+//   return (
+//     normalizeTopicLabel(fallbackTopic || "") ||
+//     `Page ${Number.isFinite(pageNumber) ? pageNumber : ""}`.trim()
+//   );
+// }
+
 function extractTopicFromPage(textContent, pageText, fallbackTopic, pageNumber) {
-  const lines = buildTextLines(textContent).slice(0, 6);
+  const lines = buildTextLines(textContent).slice(0, 10); // 6 se badhakar 10 kiya
   let best = "";
   let bestScore = 0;
 
   for (const { line } of lines) {
-    const score = scoreTopicCandidate(line);
-    if (score > bestScore) {
-      bestScore = score;
-      best = line;
+    const cleaned = line.replace(/\s+/g, " ").trim();
+    const score = scoreTopicCandidate(cleaned);
+
+    // Extra priority to short, meaningful lines (likely headings)
+    let finalScore = score;
+    if (cleaned.length < 60 && cleaned.length > 8) finalScore += 15;
+    if (/^[A-Z]/.test(cleaned) && cleaned.length < 80) finalScore += 12;
+
+    if (finalScore > bestScore) {
+      bestScore = finalScore;
+      best = cleaned;
     }
   }
 
+  // Fallback improvements
   if (!best && pageText) {
-    const sentence = pageText.split(/[\.!?]/)[0] || "";
-    const fallback = sentence || pageText;
-    best = fallback.split(" ").slice(0, 14).join(" ");
+    const sentences = pageText.split(/[.!?]/).map(s => s.trim()).filter(s => s.length > 10);
+    if (sentences.length > 0) {
+      best = sentences[0].slice(0, 100);
+    }
   }
 
-  const normalized = normalizeTopicLabel(best);
-  if (normalized) return normalized;
-  return (
-    normalizeTopicLabel(fallbackTopic || "") ||
-    `Page ${Number.isFinite(pageNumber) ? pageNumber : ""}`.trim()
-  );
+  let normalized = normalizeTopicLabel(best);
+
+  // Extra cleaning for broken text
+  normalized = normalized.replace(/(\w)\s+(\w)/g, '$1$2'); // Remove extra spaces in words
+  normalized = normalized.replace(/\s+/g, " ").trim();
+
+  if (normalized && normalized.length > 8) return normalized;
+
+  return normalizeTopicLabel(fallbackTopic || "") ||
+    `Page ${Number.isFinite(pageNumber) ? pageNumber : ""}`.trim();
 }
 
 function safeReadJson(filePath) {
@@ -693,4 +750,41 @@ export function getSourceTopicIndexes(maxLinesPerSource = 260) {
       return `## Topic Index: ${name}\n${lines.join("\n")}`;
     })
     .join("\n\n---\n\n");
+}
+
+// pdfService.js mein add karo
+export function getPdfSourceCatalog() {
+  const entries = getImageMetadata();
+  const map = new Map();
+
+  for (const e of entries) {
+    const key = e.pdf_name;
+    if (!key || map.has(key)) continue;
+    map.set(key, true);
+  }
+
+  // Human-readable display names — har naye pdf_name ke liye yahan map add karte raho
+  const DISPLAY_NAME_MAP = {
+    nucleus_distribution: "Nucleus Distribution (company profile)",
+    ac: "IOTFIY AC-Kit",
+    easy_solar: "EASY Solar",
+    ecosystem: "IOTFIY Ecosystem Overview",
+    epsn: "Enterprise Private Social Network (EPSN)",
+    iotfiy_gateway: "IOTFIY Gateway (dashboard & widgets product)",
+    iotfiy: "IOTFIY General / AI Computer Vision & Company Overview",
+    mushaba_rag: "Mushaba Rag (Hajj/Umrah pilgrim navigation)",
+    nucleus_vericom: "Nucleus Vericom (cables & networking infrastructure)",
+    packtrack: "PackTrack AI logistics automation",
+    polekit: "PoleKit electrical pole leakage detection",
+    sales_hub: "IOTFIY Sales Hub",
+    services: "IOTFIY Services (general solutions: gas detection, weather, GameNest, theft detection, etc.)",
+    social_app: "Enterprise event/social platform",
+    studio: "3D AI Chatbot & Immersive Customer Experience (Studio)",
+    tour: "Mushaba/Pilgrim Navigation Tour features",
+  };
+
+  return [...map.keys()].map((key) => ({
+    pdfId: key,
+    displayName: DISPLAY_NAME_MAP[key] || key,
+  }));
 }

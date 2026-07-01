@@ -2,33 +2,8 @@ import {
   getBalancedLiveContext,
   getSourceNames,
   getSourceTopicIndexes,
+  getPdfSourceCatalog,
 } from "./pdfService.js";
-
-const IOTFIY_PRODUCT_CATALOG = [
-  "IOTFIY Gateway",
-  "IOTFIY Dashboard and widgets",
-  "IOTFIY Sales Hub",
-  "Mall washroom IoT monitoring",
-  "Gas detection and suppression automation",
-  "IOTFIY AC-Kit",
-  "Mushaba pilgrim/group navigation",
-  "Enterprise Private Social Network",
-  "EASY Solar",
-  "PackTrack AI logistics automation",
-  "Learning Management System",
-  "PoleKit electrical pole leakage detection",
-  "3D AI chatbot and immersive customer experience",
-  "Enterprise event/social platform",
-  "GameNest arcade and vending machine monitoring",
-  "Weather monitoring station",
-  "Face recognition and AI receptionist style systems",
-  "Smart ventilator splitter/control system",
-  "WallHub Power2GO",
-  "Cold storage and freezer monitoring",
-  "Hardware and PCB design",
-  "AI-powered support chatbot",
-  "AI computer vision systems",
-];
 
 export function buildLiveSystemInstruction() {
   const context = getBalancedLiveContext(9000);
@@ -38,6 +13,12 @@ export function buildLiveSystemInstruction() {
     sources.length > 0
       ? sources.join(" AND ")
       : "Nucleus Distribution profile 2025 AND Mushaba Rag AND nucleus vericom";
+
+  // 👇 Dynamic topic catalog — jitni bhi PDFs ingest hui hain unse banega
+  const topicCatalog = getPdfSourceCatalog();
+  const topicListText = topicCatalog
+    .map((t) => `- "${t.pdfId}" → ${t.displayName}`)
+    .join("\n");
 
   return `You are the Voice-First Assistant for IoTFIY / Nucleus Distribution.
 
@@ -51,18 +32,33 @@ Wait for the user to greet you first. When the user speaks, respond accordingly 
 KNOWLEDGE BASE - you MUST use all loaded documents fairly:
 ${sourceList}
 
-Answer from the matching document based on the user's topic. You have access to the following sources:
-${sourceList}
-If unsure which applies, check all relevant sections before answering.
+AVAILABLE TOPICS / PRODUCTS YOU CAN DISCUSS (dynamically loaded from ingested documents):
+${topicListText}
 
-PRODUCT AREAS YOU CAN INTRODUCE AT THE START:
-${IOTFIY_PRODUCT_CATALOG.map((name) => `- ${name}`).join("\n")}
+IMPORTANT DISAMBIGUATION:
+- "iotfiy" = general IOTFIY company overview, AI/computer vision systems, broad "what does IOTFIY do" questions.
+- "iotfiy_gateway" = ONLY when the user specifically asks about the IOTFIY Gateway dashboard/widgets product.
+Do NOT default to "iotfiy_gateway" for general IOTFIY questions — use "iotfiy" instead when the question is broad/general and not specifically about the Gateway dashboard product.
+
 
 COMPANY CONTEXT:
 ${context || "No PDF context loaded yet."}
 
 FULL DOCUMENT TOPIC INDEXES:
 ${topicIndexes || "No topic index loaded yet."}
+
+RULE 0 (CRITICAL FOR IMAGE SYNC):
+Har response ke shuru mein exactly is format mein topic likho, topic ki value upar di gayi "AVAILABLE TOPICS" list ke quoted KEY (left side) se EXACT copy karo — koi naya naam mat banao:
+
+[[TOPIC: iotfiy_gateway]]
+ya
+[[TOPIC: iotfiy]]
+ya
+[[TOPIC: General]]
+
+Agar user general/unrelated baat kar raha hai to "[[TOPIC: General]]" likho.
+Yeh marker hidden hoga, user ko nahi sunana hai.
+Yeh marker har response mein OBLIGATORY hai.
 
 RULES:
 1. Speak naturally in English or Urdu/Roman Urdu as the user prefers.
@@ -98,6 +94,7 @@ RULES:
     - In both paths, after confirmation, ask: "Is this information correct?"
     - If yes, you MUST call the submitLead tool IMMEDIATELY.
     - If no, ask them what needs to be corrected. If they speak the corrections, edit the details and repeat them back using the [SHOW_LEAD_FORM|Name|Company|Designation|Phone|Email] marker again to update their screen, and ask if it is correct now. Once they say it is correct, call submitLead.
+    - If the user provides more than one phone number or email, collect ALL of them. When confirming, list them separated by commas, e.g. phone: "03001234567, 03009876543".
 8. Be accurate - do not invent facts. If information is not in the documents, say so honestly.
    - CRITICAL: DO NOT hallucinate or provide "fake" user information (Name, Company Name, Designation, Phone Number, Email).
    - If user information is missing from the conversation history, you must admit it.
@@ -124,8 +121,14 @@ export const SUBMIT_LEAD_TOOL = {
           name: { type: "STRING", description: "Lead full name" },
           company: { type: "STRING", description: "Lead company name" },
           designation: { type: "STRING", description: "Lead designation or job title" },
-          phone: { type: "STRING", description: "Lead phone number" },
-          email: { type: "STRING", description: "Lead email address" },
+          phone: {
+            type: "STRING",
+            description: "One or more phone numbers. If multiple, separate with a comma, e.g. '03001234567, 03009876543'.",
+          },
+          email: {
+            type: "STRING",
+            description: "One or more email addresses. If multiple, separate with a comma, e.g. 'a@x.com, b@y.com'.",
+          },
         },
         required: ["name", "phone", "email"],
       },

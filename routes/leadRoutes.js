@@ -37,17 +37,39 @@ router.post("/", async (req, res, next) => {
  * GET /api/leads — List all leads (for analytics dashboard)
  */
 router.get("/all", async (_req, res, next) => {
+  // try {
+  //   const leads = await Lead.find()
+  //     .sort({ createdAt: -1 });
+
+  //   if (leads.length === 0) {
+  //     return res.status(404).json({ message: "no leads found" });
+  //   }
+
+  //   return res.json({ success: true, leads });
+  // } catch (err) {
+  //   next(err);
+  // }
   try {
     const leads = await Lead.find()
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .lean();   // 👈 Mongoose document ki jagah plain JS object milega
 
-    if (leads.length === 0) {
-      return res.status(404).json({ message: "no leads found" });
-    }
+    // topic_counts Map → plain object (lean ke baad bhi kabhi Map aa sakta hai)
+    const normalized = leads.map((lead) => ({
+      ...lead,
+      topic_counts: lead.topic_counts instanceof Map
+        ? Object.fromEntries(lead.topic_counts)
+        : (lead.topic_counts && typeof lead.topic_counts === "object"
+          ? lead.topic_counts
+          : {}),
+      // phone/email bhi array guarantee karo
+      phone: Array.isArray(lead.phone) ? lead.phone : (lead.phone ? [lead.phone] : []),
+      email: Array.isArray(lead.email) ? lead.email : (lead.email ? [lead.email] : []),
+    }));
 
-    return res.json({ success: true, leads });
+    res.json({ success: true, leads: normalized });
   } catch (err) {
-    next(err);
+    res.status(500).json({ success: false, message: err.message });
   }
 });
 

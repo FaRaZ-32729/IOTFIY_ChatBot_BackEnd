@@ -1,7 +1,16 @@
 import Lead from "../models/Lead.js";
 
-function normalizeCount(value) {
-  return Math.max(0, Number(value) || 0);
+function normalizeToArray(value) {
+  if (value === undefined || value === null || value === "") return [];
+  if (Array.isArray(value)) {
+    return [...new Set(value.map((v) => String(v).trim()).filter(Boolean))];
+  }
+  // Single string — agar comma/semicolon/"and" se separate kiye gaye hon to split karo
+  const parts = String(value)
+    .split(/[,;]|(?:\s+and\s+)/i)
+    .map((v) => v.trim())
+    .filter(Boolean);
+  return [...new Set(parts)];
 }
 
 export async function saveLead({
@@ -11,8 +20,7 @@ export async function saveLead({
   phone,
   email,
   sessionId,
-  mushaba_count,
-  nucleus_distribution_count,
+  topic_counts,
 }) {
   const payload = {
     source: "voice-live",
@@ -21,23 +29,22 @@ export async function saveLead({
   if (name !== undefined) payload.name = String(name || "").trim();
   if (company !== undefined) payload.company = String(company || "").trim();
   if (designation !== undefined) payload.designation = String(designation || "").trim();
-  if (phone !== undefined) payload.phone = String(phone || "").trim();
-  if (email !== undefined) payload.email = String(email || "").trim().toLowerCase();
+  if (phone !== undefined) payload.phone = normalizeToArray(phone);
+  if (email !== undefined) payload.email = normalizeToArray(email).map((e) => e.toLowerCase());
   if (sessionId !== undefined) payload.sessionId = sessionId || null;
-  if (mushaba_count !== undefined) payload.mushaba_count = normalizeCount(mushaba_count);
-  if (nucleus_distribution_count !== undefined) {
-    payload.nucleus_distribution_count = normalizeCount(nucleus_distribution_count);
-  }
 
-  const hasLeadDetails = Boolean(payload.name && payload.phone && payload.email);
+  const hasLeadDetails = Boolean(payload.name && payload.phone?.length && payload.email?.length);
   if (!hasLeadDetails) {
     throw new Error("Cannot create a lead without name, phone, and email.");
   }
 
+  if (topic_counts) {
+    if (!payload.topic_counts) payload.topic_counts = new Map();
+    for (const [key, val] of Object.entries(topic_counts)) {
+      payload.topic_counts.set(key, val);
+    }
+  }
+
   const lead = await Lead.create(payload);
-  console.log("[LEAD] Lead created:", lead._id, "counts:", {
-    mushaba: lead.mushaba_count,
-    nucleus: lead.nucleus_distribution_count,
-  });
   return lead;
 }
