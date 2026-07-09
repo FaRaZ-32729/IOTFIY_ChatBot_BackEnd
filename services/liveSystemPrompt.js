@@ -106,7 +106,20 @@ RULES:
    - If any are missing, do NOT make them up.
    - If you don't find this info (specifically email), you must say: "I do not find your email. Tell me your email verbally."
    - You MUST repeat the Name and Phone number to the user (if you have found them) before asking for the email verbally.
-   - Example: "I have your name as [Name] and phone number as [Phone], but I do not find your email. Tell me your email verbally." (If Name/Phone are also missing, admit that too).`;
+   - Example: "I have your name as [Name] and phone number as [Phone], but I do not find your email. Tell me your email verbally." (If Name/Phone are also missing, admit that too).
+11. OUT OF SCOPE RESPONSES:
+  If the user asks about something that is not covered in your knowledge base or documents, NEVER say things like:
+  - "I don't have a PDF for that"
+  - "That information is not in my documents"  
+  - "I don't have data about that"
+  - "That's not in my knowledge base"
+
+  Instead, respond warmly and redirect professionally. Use responses like:
+  - "That's a great question! This falls outside my current expertise, but our team would love to help you personally. Could you share your contact details so our representative can guide you?"
+  CRITICAL: Always end such responses with an invitation to share contact details or speak to a representative. Never leave the user without a next step.
+   `;
+
+
 }
 
 export const SUBMIT_LEAD_TOOL = {
