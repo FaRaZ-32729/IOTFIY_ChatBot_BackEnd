@@ -8,7 +8,11 @@ import {
   buildLiveSystemInstruction,
   SUBMIT_LEAD_TOOL,
 } from "./liveSystemPrompt.js";
-import { enrichQueryForLive, clearLiveRagSession } from "./liveRagService.js";
+import {
+  enrichQueryForLive,
+  clearLiveRagSession,
+  pickImagesForLive,
+} from "./liveRagService.js";
 
 const FALLBACK_LIVE_MODELS = [
   "gemini-3.1-flash-live-preview",
@@ -34,6 +38,9 @@ const leadFormShownBySession = new Map();
 //new
 const topicDispatchedThisTurn = new Map();
 const currentTurnTopic = new Map();
+// True once we sent page-matched images for this turn (not whole-PDF dump)
+const imagesFocusedThisTurn = new Map();
+const pendingPdfBaselineTimer = new Map();
 
 function sendJson(ws, payload) {
   if (ws.readyState === ws.OPEN) {
@@ -120,30 +127,97 @@ function mergeLeadDraft(sessionId, text, clientWs, forceShow = false) {
   }
 }
 
-function dispatchLiveImages(clientWs, sessionId, text) {
-  enrichQueryForLive(sessionId, text, {
-    onImages: (payload) => {
-      const images = Array.isArray(payload)
-        ? payload.filter((item) => item && typeof item === "object")
-        : [];
-      const urls = images.length
-        ? images
-          .map((img) =>
-            img.url || (img.image_path ? `/${String(img.image_path).replace(/^\/+/, "")}` : null)
-          )
-          .filter(Boolean)
-        : Array.isArray(payload)
-          ? payload.filter((item) => typeof item === "string")
-          : [];
+function sendImagePayload(clientWs, payload) {
+  const images = Array.isArray(payload)
+    ? payload.filter((item) => item && typeof item === "object")
+    : [];
+  const urls = images.length
+    ? images
+      .map((img) =>
+        img.url || (img.image_path ? `/${String(img.image_path).replace(/^\/+/, "")}` : null)
+      )
+      .filter(Boolean)
+    : Array.isArray(payload)
+      ? payload.filter((item) => typeof item === "string")
+      : [];
 
-      sendJson(clientWs, {
-        type: "images",
-        images: images.length ? images : undefined,
-        urls,
-        replace: true,
-      });
+  if (!images.length && !urls.length) return false;
+
+  sendJson(clientWs, {
+    type: "images",
+    images: images.length ? images : undefined,
+    urls,
+    replace: true,
+  });
+  return true;
+}
+
+function dispatchLiveImages(clientWs, sessionId, text, pdfFilter = null) {
+  enrichQueryForLive(sessionId, text, {
+    pdfFilter,
+    onImages: (payload) => {
+      if (sendImagePayload(clientWs, payload)) {
+        imagesFocusedThisTurn.set(sessionId, true);
+      }
     },
   });
+}
+
+/**
+ * Re-rank images using ONLY the assistant's spoken response.
+ * Can update once a stronger/more specific match appears mid-turn.
+ */
+function refineImagesFromAssistantSpeech(clientWs, sessionId, assistantText, pdfFilter) {
+  if (!pdfFilter) return;
+  if (!assistantText || assistantText.trim().length < 12) return;
+
+  const focused = pickImagesForLive(assistantText, pdfFilter, {
+    allowPdfBaseline: false,
+    limit: 8,
+  });
+  if (!focused.length) return;
+
+  // Avoid re-sending the exact same set
+  const key = focused.map((img) => img.image_path || img.url).join("|");
+  const prevKey = imagesFocusedThisTurn.get(sessionId);
+  if (prevKey === key) return;
+
+  console.log(
+    `🎯 [ASSISTANT-REFINE] topic="${pdfFilter}" → ${focused.length} image(s) from AI speech`
+  );
+  if (sendImagePayload(clientWs, focused)) {
+    imagesFocusedThisTurn.set(sessionId, key);
+    const pending = pendingPdfBaselineTimer.get(sessionId);
+    if (pending) {
+      clearTimeout(pending);
+      pendingPdfBaselineTimer.delete(sessionId);
+    }
+  }
+}
+
+function schedulePdfBaselineFallback(clientWs, sessionId, pdfFilter) {
+  const prev = pendingPdfBaselineTimer.get(sessionId);
+  if (prev) clearTimeout(prev);
+
+  // If assistant speech never yields a page match, show PDF images after a short wait
+  const timer = setTimeout(() => {
+    pendingPdfBaselineTimer.delete(sessionId);
+    if (imagesFocusedThisTurn.get(sessionId)) return;
+    const baseline = pickImagesForLive(pdfFilter, pdfFilter, {
+      allowPdfBaseline: true,
+      limit: 8,
+    });
+    if (baseline.length) {
+      console.log(`🖼️  [PDF-FALLBACK] topic="${pdfFilter}" → ${baseline.length} baseline image(s)`);
+      sendImagePayload(clientWs, baseline);
+      imagesFocusedThisTurn.set(
+        sessionId,
+        baseline.map((img) => img.image_path || img.url).join("|")
+      );
+    }
+  }, 3500);
+
+  pendingPdfBaselineTimer.set(sessionId, timer);
 }
 
 async function connectLiveSession(ai, preferredModel, config, callbacks) {
@@ -263,8 +337,18 @@ export async function attachClientToGemini(clientWs, sessionId) {
 
           if (!topicDispatchedThisTurn.get(sessionId) && topic.toLowerCase() !== "general") {
             topicDispatchedThisTurn.set(sessionId, true);
-            console.log(`🎯 [TOPIC-MARKER] Gemini said topic = "${topic}" — searching images once`);
-            dispatchLiveImages(clientWs, sessionId, topic);
+            imagesFocusedThisTurn.delete(sessionId);
+
+            // Do NOT search images from the user question — it mismatches
+            // (e.g. "Malik" → both Jawwad + Ammad). Wait for AI speech below.
+            const userQuestion = (userUtteranceBuffer.get(sessionId) || "").trim();
+            console.log(
+              `🎯 [TOPIC-MARKER] topic="${topic}" | userQ="${userQuestion.slice(0, 80)}" — waiting for AI speech to pick images`
+            );
+            userUtteranceBuffer.set(sessionId, "");
+
+            // If AI speech never yields a page match, show PDF baseline later
+            schedulePdfBaselineFallback(clientWs, sessionId, topic);
 
             // 👇 NAYA: per-topic count badhao
             const normalizedTopic = topic.toLowerCase().trim();
@@ -279,7 +363,16 @@ export async function attachClientToGemini(clientWs, sessionId) {
               console.warn("Topic count save error:", err.message)
             );
 
+          } else if (topic.toLowerCase() === "general") {
+            // No product images for general chat — drop stale utterance
+            userUtteranceBuffer.set(sessionId, "");
           }
+        }
+
+        // ONLY source of truth for which image(s) to show: AI spoken response
+        const activeTopic = currentTurnTopic.get(sessionId);
+        if (activeTopic && activeTopic.toLowerCase() !== "general") {
+          refineImagesFromAssistantSpeech(clientWs, sessionId, newBuffer, activeTopic);
         }
 
         // 1. Check for [[SHOW_IMAGE:X]]
@@ -376,6 +469,12 @@ export async function attachClientToGemini(clientWs, sessionId) {
         //new
         topicDispatchedThisTurn.set(sessionId, false);   // 👈 add this
         currentTurnTopic.delete(sessionId);
+        imagesFocusedThisTurn.delete(sessionId);
+        const pending = pendingPdfBaselineTimer.get(sessionId);
+        if (pending) {
+          clearTimeout(pending);
+          pendingPdfBaselineTimer.delete(sessionId);
+        }
       }
     },
     onerror: (err) => {
@@ -458,6 +557,12 @@ export async function attachClientToGemini(clientWs, sessionId) {
     //new
     topicDispatchedThisTurn.delete(sessionId);   // 👈 add
     currentTurnTopic.delete(sessionId);
+    imagesFocusedThisTurn.delete(sessionId);
+    const pending = pendingPdfBaselineTimer.get(sessionId);
+    if (pending) {
+      clearTimeout(pending);
+      pendingPdfBaselineTimer.delete(sessionId);
+    }
     leadDraftBySession.delete(sessionId);
     leadFormShownBySession.delete(sessionId);
     if (topicDebounceTimers.has(sessionId)) {
