@@ -1726,5 +1726,59 @@
     "pdf_name": "nucleus_vericom",
     "page_number": 47,
     "topic": "Tel: (+9221) 34811196Email: sales@nucleus - pk.com"
+  },
+  {
+    "image_path": "uploads/extracted_images/our_leaders/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
+    "pdf_name": "our_leaders",
+    "page_number": 2,
+    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
+  },
+  {
+    "image_path": "uploads/extracted_images/our_leaders/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
+    "pdf_name": "our_leaders",
+    "page_number": 3,
+    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/our_leaders/hamzaaslam_chieftechnologyofficer_cto_page_4.png",
+    "pdf_name": "our_leaders",
+    "page_number": 4,
+    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_tems/muhammadjawwadmalik_chiefexecutiveofficer_ceo_page_1.png",
+    "pdf_name": "iotfiy_tems",
+    "page_number": 1,
+    "topic": "MuhammadJawwadMalik, ChiefExecutiveOfficer (CEO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_tems/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
+    "pdf_name": "iotfiy_tems",
+    "page_number": 2,
+    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_tems/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
+    "pdf_name": "iotfiy_tems",
+    "page_number": 3,
+    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_teams/muhammadjawwadmalik_chiefexecutiveofficer_ceo_page_1.png",
+    "pdf_name": "iotfiy_teams",
+    "page_number": 1,
+    "topic": "MuhammadJawwadMalik, ChiefExecutiveOfficer (CEO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_teams/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
+    "pdf_name": "iotfiy_teams",
+    "page_number": 2,
+    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_teams/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
+    "pdf_name": "iotfiy_teams",
+    "page_number": 3,
+    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
   }
 ]
