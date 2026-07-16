@@ -1782,12 +1782,6 @@
     "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
   },
   {
-    "image_path": "uploads/extracted_images/vivanco_teams/talibhussain_countrydirector_pakistan_vivanco_page_1.png",
-    "pdf_name": "vivanco_teams",
-    "page_number": 1,
-    "topic": "TalibHussain, CountryDirector – Pakistan (VIVANCO /"
-  },
-  {
     "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1.png",
     "pdf_name": "mushaba",
     "page_number": 1,
@@ -2026,5 +2020,17 @@
     "pdf_name": "nucleus_teams",
     "page_number": 2,
     "topic": "SalmanYousufChiefExecutiveOfficerNucleusDistribution"
+  },
+  {
+    "image_path": "uploads/extracted_images/vivanco_teams/talibhussain_countrydirector_pakistan_vivanco_page_1.png",
+    "pdf_name": "vivanco_teams",
+    "page_number": 1,
+    "topic": "TalibHussain, CountryDirector – Pakistan (VIVANCO /"
+  },
+  {
+    "image_path": "uploads/extracted_images/vivanco_teams/email_rizwan_khan_nucleus_pk_com_page_2.png",
+    "pdf_name": "vivanco_teams",
+    "page_number": 2,
+    "topic": "Email: rizwan.khan@nucleus - pk.com"
   }
 ]
