@@ -781,6 +781,8 @@ export function getPdfSourceCatalog() {
     social_app: "Enterprise event/social platform",
     studio: "3D AI Chatbot & Immersive Customer Experience (Studio)",
     tour: "Mushaba/Pilgrim Navigation Tour features",
+    ai_knowledge_assistant:
+      "IOTFIY AI Knowledge Assistant (intelligent conversational AI / knowledge-base product)",
   };
 
   return [...map.keys()].map((key) => ({
