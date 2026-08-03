@@ -5,27 +5,40 @@ import { liveSessionStats } from "../services/liveGeminiBridge.js";
 
 const router = Router();
 
+function hasNonEmptyValue(value) {
+  if (Array.isArray(value)) {
+    return value.some((entry) => String(entry || "").trim());
+  }
+  return Boolean(String(value || "").trim());
+}
+
+function trimScalar(value) {
+  return String(value || "").trim();
+}
+
 /**
  * POST /api/leads — Save or update a lead
  */
 router.post("/", async (req, res, next) => {
   try {
     const { name, company, designation, phone, email, sessionId } = req.body || {};
-    if (!name?.trim() || !phone?.trim() || !email?.trim()) {
+    if (!trimScalar(name) || !hasNonEmptyValue(phone) || !hasNonEmptyValue(email)) {
       return res.status(400).json({
         success: false,
         error: "name, phone, and email are required",
       });
     }
 
-    // Include in-memory topic counts so they aren't lost when
-    // the frontend submits the form directly
-    const counts = sessionId ? (liveSessionStats.get(sessionId) || {}) : {};
+    const stats = sessionId ? (liveSessionStats.get(sessionId) || {}) : {};
 
     const lead = await saveLead({
-      name, company, designation, phone, email, sessionId,
-      mushaba_count: counts.mushaba_count || undefined,
-      nucleus_distribution_count: counts.nucleus_distribution_count || undefined,
+      name,
+      company,
+      designation,
+      phone,
+      email,
+      sessionId,
+      topic_counts: stats.topic_counts || undefined,
     });
     res.status(201).json({ success: true, lead });
   } catch (err) {
