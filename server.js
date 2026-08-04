@@ -29,7 +29,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://iotfiy-chatbot.vercel.app" || "http://localhost:5174" || "http://localhost:5173",
+    origin: process.env.FRONTEND_URL || "https://iotfiy-chatbot.vercel.app" || "http://localhost:5174" || "http://localhost:5173" || "https://bot.iotfiysolutions.com",
     credentials: true,
   })
 );
