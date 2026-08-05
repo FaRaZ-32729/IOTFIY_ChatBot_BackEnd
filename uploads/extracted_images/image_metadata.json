@@ -162,19 +162,7 @@
     "topic": "Thesystemisavailableinthreehardwarevariants :"
   },
   {
-    "image_path": "uploads/extracted_images/ac/centralizedacdashboard_page_4.png",
-    "pdf_name": "ac",
-    "page_number": 4,
-    "topic": "CentralizedACDashboard"
-  },
-  {
     "image_path": "uploads/extracted_images/ac/temperaturelock_remoterestriction_page_5.png",
-    "pdf_name": "ac",
-    "page_number": 5,
-    "topic": "TemperatureLock & RemoteRestriction"
-  },
-  {
-    "image_path": "uploads/extracted_images/ac/temperaturelock_remoterestriction_page_5_img_2.png",
     "pdf_name": "ac",
     "page_number": 5,
     "topic": "TemperatureLock & RemoteRestriction"
@@ -210,16 +198,64 @@
     "topic": "InbanksandATMvestibules, IOTFIYAC-Kitcansetcoolingtemperaturesbetween"
   },
   {
-    "image_path": "uploads/extracted_images/easy_solar/iotfiyeasysolar_page_1.png",
-    "pdf_name": "easy_solar",
-    "page_number": 1,
-    "topic": "IOTFIYEASYSolar"
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/iotfiyaiknowledgeassistantisanintelligentconversationalaiplatformthatconvertsyour_page_3.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 3,
+    "topic": "IOTFIYAIKnowledgeAssistantisanintelligentconversationalAIplatformthatconvertsyour"
   },
   {
-    "image_path": "uploads/extracted_images/easy_solar/problemstatement_page_2.png",
-    "pdf_name": "easy_solar",
-    "page_number": 2,
-    "topic": "ProblemStatement"
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/step2_trainyouraiassistant_page_4.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 4,
+    "topic": "Step2 — TrainYourAIAssistant"
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/intelligentknowledgebase_page_6.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 6,
+    "topic": "IntelligentKnowledgeBase"
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/createanenterpriseaiassistantwithoutwritingcode_page_7.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 7,
+    "topic": "CreateanenterpriseAIassistantwithoutwritingcode."
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/userssimplyaskquestionsnaturally_page_8.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 8,
+    "topic": "Userssimplyaskquestionsnaturally."
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/businessescandeploytheaiassistanttoprovide_page_11.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 11,
+    "topic": "BusinessescandeploytheAIassistanttoprovide:"
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/industryapplications_page_12.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 12,
+    "topic": "IndustryApplications"
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/hospitals_page_13.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 13,
+    "topic": "Hospitals"
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/governmentorganizations_page_14.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 14,
+    "topic": "GovernmentOrganizations"
+  },
+  {
+    "image_path": "uploads/extracted_images/ai_knowledge_assistant/iotfiyaiknowledgeassistantprovidesa_scalable_secure_andfuture_readyaisolutionthat_page_18.png",
+    "pdf_name": "ai_knowledge_assistant",
+    "page_number": 18,
+    "topic": "IOTFIYAIKnowledgeAssistantprovidesa scalable, secure, andfuture-readyAIsolutionthat"
   },
   {
     "image_path": "uploads/extracted_images/easy_solar/smartmicroinverterforstableoutput_page_4.png",
@@ -277,12 +313,6 @@
   },
   {
     "image_path": "uploads/extracted_images/ecosystem/serviceprovider_iotfiysolutions_page_1.png",
-    "pdf_name": "ecosystem",
-    "page_number": 1,
-    "topic": "ServiceProvider: IOTFIYSolutions"
-  },
-  {
-    "image_path": "uploads/extracted_images/ecosystem/serviceprovider_iotfiysolutions_page_1_img_2.png",
     "pdf_name": "ecosystem",
     "page_number": 1,
     "topic": "ServiceProvider: IOTFIYSolutions"
@@ -570,172 +600,250 @@
     "topic": "WhyChooseIOTFIYSolutions?"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushaba_yourcompanionforhajj_umrah_page_1.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/iotfiyclients/collaborationwithiotfi_ysolutions_page_1.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 1,
+    "topic": " CollaborationwithIoTfi ySolutions:"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/productdeveloped_iotfiypolekit_page_2.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 2,
+    "topic": "ProductDeveloped: IOTFIYPoleKit"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/client_getzpharma_page_3.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 3,
+    "topic": "Client: GetzPharma"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/productdeveloped_iot_basedarcade_vendingmachineautomationplatform_page_4.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 4,
+    "topic": "ProductDeveloped: IoT - BasedArcade & VendingMachineAutomationPlatform"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/collaborationwithiotfysolutions_page_5.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 5,
+    "topic": " CollaborationwithIoTfySolutions:"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/collaborationwithiotfi_ysolutions_page_10.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 10,
+    "topic": "• CollaborationwithIoTfi ySolutions:"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/productdeveloped_smartfumehoodcontroller_page_11.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 11,
+    "topic": "ProductDeveloped: SmartFumeHoodController"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/productdeveloped_iot_basedenvironmentalmonitoringapplication_page_12.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 12,
+    "topic": "ProductDeveloped: IoT - BasedEnvironmentalMonitoringApplication"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiyclients/collaborationwithiotfi_ysolutions_page_13.png",
+    "pdf_name": "iotfiyclients",
+    "page_number": 13,
+    "topic": "• CollaborationwithIoTfi ySolutions:"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_teams/muhammadjawwadmalik_chiefexecutiveofficer_ceo_page_1.png",
+    "pdf_name": "iotfiy_teams",
+    "page_number": 1,
+    "topic": "MuhammadJawwadMalik, ChiefExecutiveOfficer (CEO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_teams/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
+    "pdf_name": "iotfiy_teams",
+    "page_number": 2,
+    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
+  },
+  {
+    "image_path": "uploads/extracted_images/iotfiy_teams/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
+    "pdf_name": "iotfiy_teams",
+    "page_number": 3,
+    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1.png",
+    "pdf_name": "mushaba",
     "page_number": 1,
     "topic": "Mushaba: YourCompanionforHajj & Umrah"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushaba_yourcompanionforhajj_umrah_page_1_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 1,
     "topic": "Mushaba: YourCompanionforHajj & Umrah"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushaba_yourcompanionforhajj_umrah_page_1_img_3.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1_img_3.png",
+    "pdf_name": "mushaba",
     "page_number": 1,
     "topic": "Mushaba: YourCompanionforHajj & Umrah"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushababringsclaritytoconfusion_connectiontoisolation_andpeaceofmindtowhat_page_3.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushababringsclaritytoconfusion_connectiontoisolation_andpeaceofmindtowhat_page_3.png",
+    "pdf_name": "mushaba",
     "page_number": 3,
     "topic": "Mushababringsclaritytoconfusion, connectiontoisolation, andpeaceofmindtowhat"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushababringsclaritytoconfusion_connectiontoisolation_andpeaceofmindtowhat_page_3_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushababringsclaritytoconfusion_connectiontoisolation_andpeaceofmindtowhat_page_3_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 3,
     "topic": "Mushababringsclaritytoconfusion, connectiontoisolation, andpeaceofmindtowhat"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/eachgroupismanagedbyanadminwhocan_page_4.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4.png",
+    "pdf_name": "mushaba",
     "page_number": 4,
     "topic": "Eachgroupismanagedbyanadminwhocan:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/eachgroupismanagedbyanadminwhocan_page_4_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 4,
     "topic": "Eachgroupismanagedbyanadminwhocan:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/eachgroupismanagedbyanadminwhocan_page_4_img_3.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_3.png",
+    "pdf_name": "mushaba",
     "page_number": 4,
     "topic": "Eachgroupismanagedbyanadminwhocan:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/eachgroupismanagedbyanadminwhocan_page_4_img_4.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_4.png",
+    "pdf_name": "mushaba",
     "page_number": 4,
     "topic": "Eachgroupismanagedbyanadminwhocan:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/eachgroupismanagedbyanadminwhocan_page_4_img_5.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_5.png",
+    "pdf_name": "mushaba",
     "page_number": 4,
     "topic": "Eachgroupismanagedbyanadminwhocan:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/userscantapanypinto_page_5.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/userscantapanypinto_page_5.png",
+    "pdf_name": "mushaba",
     "page_number": 5,
     "topic": "Userscantapanypinto:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6.png",
+    "pdf_name": "mushaba",
     "page_number": 6,
     "topic": "Mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 6,
     "topic": "Mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6_img_3.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6_img_3.png",
+    "pdf_name": "mushaba",
     "page_number": 6,
     "topic": "Mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/whenscannedbyanyone_theqrcodedisplays_page_7.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/whenscannedbyanyone_theqrcodedisplays_page_7.png",
+    "pdf_name": "mushaba",
     "page_number": 7,
     "topic": "Whenscannedbyanyone, theQRcodedisplays:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/whenscannedbyanyone_theqrcodedisplays_page_7_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/whenscannedbyanyone_theqrcodedisplays_page_7_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 7,
     "topic": "Whenscannedbyanyone, theQRcodedisplays:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/whenscannedbyanyone_theqrcodedisplays_page_7_img_3.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/whenscannedbyanyone_theqrcodedisplays_page_7_img_3.png",
+    "pdf_name": "mushaba",
     "page_number": 7,
     "topic": "Whenscannedbyanyone, theQRcodedisplays:"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/userscantakeandsendreal_timephotosofsurroundings_page_8.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8.png",
+    "pdf_name": "mushaba",
     "page_number": 8,
     "topic": "Userscantakeandsendreal-timephotosofsurroundings"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/userscantakeandsendreal_timephotosofsurroundings_page_8_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 8,
     "topic": "Userscantakeandsendreal-timephotosofsurroundings"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/userscantakeandsendreal_timephotosofsurroundings_page_8_img_3.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8_img_3.png",
+    "pdf_name": "mushaba",
     "page_number": 8,
     "topic": "Userscantakeandsendreal-timephotosofsurroundings"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/userscantakeandsendreal_timephotosofsurroundings_page_8_img_4.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8_img_4.png",
+    "pdf_name": "mushaba",
     "page_number": 8,
     "topic": "Userscantakeandsendreal-timephotosofsurroundings"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/whymushabamatters_page_12.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/whymushabamatters_page_12.png",
+    "pdf_name": "mushaba",
     "page_number": 12,
     "topic": "WhyMushabaMatters"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/whymushabamatters_page_12_img_2.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/whymushabamatters_page_12_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 12,
     "topic": "WhyMushabaMatters"
   },
   {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_18.png",
-    "pdf_name": "mushaba_rag",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_18.png",
+    "pdf_name": "mushaba",
     "page_number": 18,
     "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_64_pairu_utpcable_pvc_23awg_305mbox_page_1.png",
+    "image_path": "uploads/extracted_images/nucleus_teams/farhanzaheerchiefoperatingofficer_coo_nucleus_page_1.png",
+    "pdf_name": "nucleus_teams",
+    "page_number": 1,
+    "topic": "FarhanZaheerChiefOperatingOfficer (COO) Nucleus"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_teams/salmanyousufchiefexecutiveofficernucleusdistribution_page_2.png",
+    "pdf_name": "nucleus_teams",
+    "page_number": 2,
+    "topic": "SalmanYousufChiefExecutiveOfficerNucleusDistribution"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_64_pairu_utpcable_pvc_23awg_page_1.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 1,
-    "topic": "VivancoCat - 64 PairU/UTPCable, PVC, 23AWG, 305MBox"
+    "topic": "VivancoCat - 64 PairU/UTPCable, PVC, 23AWG,"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_64_pairu_utpcable_pvc_23awg_305mbox_page_1_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 1,
-    "topic": "VivancoCat - 64 PairU/UTPCable, PVC, 23AWG, 305MBox"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6u_utp_frameonly_page_2.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6u_utp_frame_page_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 2,
-    "topic": "VivancoPatchPanel24PortCat - 6U/UTP (FrameOnly)"
+    "topic": "VivancoPatchPanel24PortCat - 6U/UTP (Frame"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6u_utp_frameonly_page_2_img_2.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6u_utp_frame_page_2_img_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 2,
-    "topic": "VivancoPatchPanel24PortCat - 6U/UTP (FrameOnly)"
+    "topic": "VivancoPatchPanel24PortCat - 6U/UTP (Frame"
   },
   {
     "image_path": "uploads/extracted_images/nucleus_vericom/vivancocopperpatchcordcat_6u_utp_page_3.png",
@@ -750,22 +858,22 @@
     "topic": "VivancoCopperPatchCordCat - 6U/UTP"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancosimplex_duplexfaceplate_page_4.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_64_pairf_utpcable_pvc_23awg_page_4.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 4,
-    "topic": "VivancoSimplex/DuplexFaceplate"
+    "topic": "VivancoCat - 64 PairF/UTPCable, PVC, 23AWG,"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6f_utp_frameonly_page_5.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6f_utp_frame_page_5.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 5,
-    "topic": "VivancoPatchPanel24PortCat - 6F /UTP (FrameOnly)"
+    "topic": "VivancoPatchPanel24PortCat - 6F/UTP (Frame"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6f_utp_frameonly_page_5_img_2.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6f_utp_frame_page_5_img_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 5,
-    "topic": "VivancoPatchPanel24PortCat - 6F /UTP (FrameOnly)"
+    "topic": "VivancoPatchPanel24PortCat - 6F/UTP (Frame"
   },
   {
     "image_path": "uploads/extracted_images/nucleus_vericom/vivancocopperpatchcordcat_6f_utp_page_6.png",
@@ -774,183 +882,159 @@
     "topic": "VivancoCopperPatchCordCat - 6F/UTP"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocopperpatchcordcat_6f_utp_page_6_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 6,
-    "topic": "VivancoCopperPatchCordCat - 6F/UTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6atoollesskeystonejackunshielded_page_7.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6a4_pairu_utpcable_pvc_23awg_page_7.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 7,
+    "topic": "VivancoCat - 6A4 PairU/UTPCable, PVC, 23AWG,"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6atoollesskeystonejackunshielded_page_8.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 8,
     "topic": "VivancoCat - 6AToolLessKeystoneJackUnshielded"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6a_u_utp_frameonly_page_8.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6atoollesskeystonejackunshielded_page_8_img_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 8,
-    "topic": "VivancoPatchPanel24PortCat - 6A U/UTP (FrameOnly)"
+    "topic": "VivancoCat - 6AToolLessKeystoneJackUnshielded"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6a_u_utp_frameonly_page_8_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 8,
-    "topic": "VivancoPatchPanel24PortCat - 6A U/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6a4_pairs_ftpcable_pvc_23awg_grey305mroll_page_9.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6au_utp_frame_page_9.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 9,
-    "topic": "VivancoCat - 6A4 PairS/FTPCable, PVC, 23AWG, Grey305MRoll"
+    "topic": "VivancoPatchPanel24PortCat - 6AU/UTP (Frame"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6s_ftp_frameonly_page_10.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6au_utp_frame_page_9_img_2.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 9,
+    "topic": "VivancoPatchPanel24PortCat - 6AU/UTP (Frame"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6a4_pairs_ftpcable_pvc_23awg_page_10.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 10,
-    "topic": "VivancoPatchPanel24PortCat - 6S / FTP (FrameOnly)"
+    "topic": "VivancoCat - 6A4 PairS/FTPCable, PVC, 23AWG,"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancopatchpanel24portcat_6s_ftp_frameonly_page_10_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 10,
-    "topic": "VivancoPatchPanel24PortCat - 6S / FTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocopperpatchcordcat_6as_ftp_page_11.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6atoollesskeystonejackshielded_page_11.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 11,
+    "topic": "VivancoCat - 6AToolLessKeystoneJackShielded"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat_6atoollesskeystonejackshielded_page_11_img_2.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 11,
+    "topic": "VivancoCat - 6AToolLessKeystoneJackShielded"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocopperpatchcordcat_6as_ftp_page_12.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 12,
     "topic": "VivancoCopperPatchCordCat - 6AS/FTP"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocopperpatchcordcat_6as_ftp_page_11_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 11,
-    "topic": "VivancoCopperPatchCordCat - 6AS/FTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vericom24portcat8_shieldedpatchpanel_withdustcap_page_12.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 12,
-    "topic": "Vericom24portCat8 shieldedpatchpanel, withdustcap"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vericom24portcat8_shieldedpatchpanel_withdustcap_page_12_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 12,
-    "topic": "Vericom24portCat8 shieldedpatchpanel, withdustcap"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberopticarmoredcablesinglemodewithsteeltape_pesheath_page_13.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vericomcat_8shieldedcable_page_13.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 13,
-    "topic": "VivancoFiberOpticArmoredCableSingleModewithSteelTape & PESheath"
+    "topic": "VericomCat - 8ShieldedCable"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberopticarmoredcablesinglemodewithsteeltape_pesheath_page_13_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 13,
-    "topic": "VivancoFiberOpticArmoredCableSingleModewithSteelTape & PESheath"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancoindoortightbufferopticalfibercablesinglemode_page_14.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vericom24portcat8_shieldedpatchpanel_with_page_14.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 14,
-    "topic": "VivancoIndoorTightBufferOpticalFiberCableSingleMode"
+    "topic": "Vericom24portCat8 shieldedpatchpanel, with"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancoindoortightbufferopticalfibercablesinglemode_page_14_img_2.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vericom24portcat8_shieldedpatchpanel_with_page_14_img_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 14,
-    "topic": "VivancoIndoorTightBufferOpticalFiberCableSingleMode"
+    "topic": "Vericom24portCat8 shieldedpatchpanel, with"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberopticlc_pcduplexcoupler_page_15.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberopticarmoredcablesinglemode_page_15.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 15,
-    "topic": "VivancoFiberOpticLC/PCDuplexCoupler"
+    "topic": "VivancoFiberOpticArmoredCableSingleMode"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberopticlc_pcduplexcoupler_page_15_img_2.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberopticarmoredcablesinglemode_page_15_img_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 15,
-    "topic": "VivancoFiberOpticLC/PCDuplexCoupler"
+    "topic": "VivancoFiberOpticArmoredCableSingleMode"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberpatchcordduplex_page_16.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancoindoortightbufferopticalfibercable_page_16.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 16,
-    "topic": "VivancoFiberPatchCordDuplex"
+    "topic": "VivancoIndoorTightBufferOpticalFiberCable"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberpatchcordduplex_page_16_img_2.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancoindoortightbufferopticalfibercable_page_16_img_2.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 16,
-    "topic": "VivancoFiberPatchCordDuplex"
+    "topic": "VivancoIndoorTightBufferOpticalFiberCable"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberpatchcordmto_page_17.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivanco24portsrackmountablefiberopticpatch_page_17.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 17,
+    "topic": "Vivanco24PortsRackMountableFiberOpticPatch"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivanco24portsrackmountablefiberopticpatch_page_17_img_2.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 17,
+    "topic": "Vivanco24PortsRackMountableFiberOpticPatch"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberpatchcordduplex_page_18.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 18,
+    "topic": "VivancoFiberPatchCordDuplex"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberpatchcordduplex_page_18_img_2.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 18,
+    "topic": "VivancoFiberPatchCordDuplex"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/vivancofiberpatchcordmto_page_19.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 19,
     "topic": "VivancoFiberPatchCordMTO"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/videolink_page_20.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 20,
-    "topic": "VideoLink"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/accesscontrol_andothercriticalparametersinrealtime_page_22.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/theencloseddesignuseshot_aisle_cold_aislecontainmentprinciplestoimprovecooling_page_22.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 22,
+    "topic": "Theencloseddesignuseshot - aisle/cold - aislecontainmentprinciplestoimprovecooling"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/accesscontrol_andothercriticalparametersinrealtime_page_24.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 24,
     "topic": "accesscontrol, andothercriticalparametersinrealtime."
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_24.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_25.png",
     "pdf_name": "nucleus_vericom",
-    "page_number": 24,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_24_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 24,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_24_img_3.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 24,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_24_img_4.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 24,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_24_img_5.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 24,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_24_img_6.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 24,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_26.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 26,
+    "page_number": 25,
     "topic": "NucleusDistributionPvtLtd"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_28.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_27.png",
     "pdf_name": "nucleus_vericom",
-    "page_number": 28,
+    "page_number": 27,
+    "topic": "NucleusDistributionPvtLtd"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_29.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 29,
     "topic": "NucleusDistributionPvtLtd"
   },
   {
@@ -1002,15 +1086,9 @@
     "topic": "NucleusDistributionPvtLtd"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_38.png",
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_37_img_2.png",
     "pdf_name": "nucleus_vericom",
-    "page_number": 38,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_38_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 38,
+    "page_number": 37,
     "topic": "NucleusDistributionPvtLtd"
   },
   {
@@ -1044,6 +1122,12 @@
     "topic": "NucleusDistributionPvtLtd"
   },
   {
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_43_img_2.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 43,
+    "topic": "NucleusDistributionPvtLtd"
+  },
+  {
     "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_44.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 44,
@@ -1059,18 +1143,6 @@
     "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_45.png",
     "pdf_name": "nucleus_vericom",
     "page_number": 45,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_45_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 45,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_46.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 46,
     "topic": "NucleusDistributionPvtLtd"
   },
   {
@@ -1302,606 +1374,6 @@
     "topic": "WhereIOTFIYisheadedinthenext12-24months."
   },
   {
-    "image_path": "uploads/extracted_images/social_app/iotfiysolutionsproposesa_custom_built_privatesocialmediaplatform_designed_page_1.png",
-    "pdf_name": "social_app",
-    "page_number": 1,
-    "topic": "IoTFIYSolutionsproposesa custom-built, privatesocialmediaplatform , designed"
-  },
-  {
-    "image_path": "uploads/extracted_images/social_app/iotfiydeliversa_dedicatedinternalsocialplatformexclusivelyforgetzpharma_page_3.png",
-    "pdf_name": "social_app",
-    "page_number": 3,
-    "topic": "IoTFIYdeliversa dedicatedinternalsocialplatformexclusivelyforGetzPharma"
-  },
-  {
-    "image_path": "uploads/extracted_images/social_app/iotfiydeliversa_dedicatedinternalsocialplatformexclusivelyforgetzpharma_page_3_img_2.png",
-    "pdf_name": "social_app",
-    "page_number": 3,
-    "topic": "IoTFIYdeliversa dedicatedinternalsocialplatformexclusivelyforGetzPharma"
-  },
-  {
-    "image_path": "uploads/extracted_images/social_app/valueforgetzpharma_page_5.png",
-    "pdf_name": "social_app",
-    "page_number": 5,
-    "topic": "ValueforGetzPharma"
-  },
-  {
-    "image_path": "uploads/extracted_images/social_app/iotfiysolutionsempowersgetzpharmawitha_privatesocialengagementecosystem_page_7.png",
-    "pdf_name": "social_app",
-    "page_number": 7,
-    "topic": "IoTFIYSolutionsempowersGetzPharmawitha privatesocialengagementecosystem"
-  },
-  {
-    "image_path": "uploads/extracted_images/studio/iotfiystudio_page_1.png",
-    "pdf_name": "studio",
-    "page_number": 1,
-    "topic": "IOTFIYStudio"
-  },
-  {
-    "image_path": "uploads/extracted_images/studio/adminsandteacherscanmonitorloginactivity_submissions_quizresults_andacademic_page_3.png",
-    "pdf_name": "studio",
-    "page_number": 3,
-    "topic": "Adminsandteacherscanmonitorloginactivity, submissions, quizresults, andacademic"
-  },
-  {
-    "image_path": "uploads/extracted_images/studio/createanduploadassignments_setdeadlines_anddistributethemtotheright_page_7.png",
-    "pdf_name": "studio",
-    "page_number": 7,
-    "topic": "Createanduploadassignments, setdeadlines, anddistributethemtotheright"
-  },
-  {
-    "image_path": "uploads/extracted_images/studio/student_focusedpractice_page_9.png",
-    "pdf_name": "studio",
-    "page_number": 9,
-    "topic": "Student-FocusedPractice"
-  },
-  {
-    "image_path": "uploads/extracted_images/tour/high_impactproblemstatements_page_2.png",
-    "pdf_name": "tour",
-    "page_number": 2,
-    "topic": "High-ImpactProblemStatements"
-  },
-  {
-    "image_path": "uploads/extracted_images/tour/ocr_textanalysis_readsdocumentsorimagesforcontextualanswers_page_4.png",
-    "pdf_name": "tour",
-    "page_number": 4,
-    "topic": "● OCR & TextAnalysis: Readsdocumentsorimagesforcontextualanswers."
-  },
-  {
-    "image_path": "uploads/extracted_images/tour/200_5_000pages_page_5.png",
-    "pdf_name": "tour",
-    "page_number": 5,
-    "topic": "(200–5,000pages)."
-  },
-  {
-    "image_path": "uploads/extracted_images/tour/aireasoninggpt_4_geminiproviaapi_page_6.png",
-    "pdf_name": "tour",
-    "page_number": 6,
-    "topic": "AIReasoningGPT-4 / GeminiProviaAPI"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_distribution/nucleusdistributionpvtltd_page_2.png",
-    "pdf_name": "nucleus_distribution",
-    "page_number": 2,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/easy_solar/keyfeatures_explainedindetail_page_3.png",
-    "pdf_name": "easy_solar",
-    "page_number": 3,
-    "topic": "KeyFeatures — ExplainedinDetail"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_19.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_19_img_2.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_19_img_3.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_19_img_4.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_19_img_5.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_19_img_6.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_20.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_20_img_2.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_20_img_3.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_20_img_4.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_20_img_5.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_20_img_6.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_21.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 21,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_21_img_2.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 21,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba_rag/productbyiotfiysolutions_page_21_img_3.png",
-    "pdf_name": "mushaba_rag",
-    "page_number": 21,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_25.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 25,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_25_img_2.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 25,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_25_img_3.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 25,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/vivancocat6_s_ftpshieldedcoppercable_page_25_img_4.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 25,
-    "topic": "VIVANCOCAT6 S / FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_27.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 27,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_distribution/nucleusdistributionpvtltd_page_4.png",
-    "pdf_name": "nucleus_distribution",
-    "page_number": 4,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_29.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 29,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_distribution/tel_9221_34811196email_sales_nucleus_pk_com_page_22.png",
-    "pdf_name": "nucleus_distribution",
-    "page_number": 22,
-    "topic": "Tel: (+9221) 34811196Email: sales@nucleus - pk.com"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericom/tel_9221_34811196email_sales_nucleus_pk_com_page_47.png",
-    "pdf_name": "nucleus_vericom",
-    "page_number": 47,
-    "topic": "Tel: (+9221) 34811196Email: sales@nucleus - pk.com"
-  },
-  {
-    "image_path": "uploads/extracted_images/our_leaders/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
-    "pdf_name": "our_leaders",
-    "page_number": 2,
-    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
-  },
-  {
-    "image_path": "uploads/extracted_images/our_leaders/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
-    "pdf_name": "our_leaders",
-    "page_number": 3,
-    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
-  },
-  {
-    "image_path": "uploads/extracted_images/our_leaders/hamzaaslam_chieftechnologyofficer_cto_page_4.png",
-    "pdf_name": "our_leaders",
-    "page_number": 4,
-    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
-  },
-  {
-    "image_path": "uploads/extracted_images/iotfiy_tems/muhammadjawwadmalik_chiefexecutiveofficer_ceo_page_1.png",
-    "pdf_name": "iotfiy_tems",
-    "page_number": 1,
-    "topic": "MuhammadJawwadMalik, ChiefExecutiveOfficer (CEO)"
-  },
-  {
-    "image_path": "uploads/extracted_images/iotfiy_tems/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
-    "pdf_name": "iotfiy_tems",
-    "page_number": 2,
-    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
-  },
-  {
-    "image_path": "uploads/extracted_images/iotfiy_tems/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
-    "pdf_name": "iotfiy_tems",
-    "page_number": 3,
-    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
-  },
-  {
-    "image_path": "uploads/extracted_images/iotfiy_teams/muhammadjawwadmalik_chiefexecutiveofficer_ceo_page_1.png",
-    "pdf_name": "iotfiy_teams",
-    "page_number": 1,
-    "topic": "MuhammadJawwadMalik, ChiefExecutiveOfficer (CEO)"
-  },
-  {
-    "image_path": "uploads/extracted_images/iotfiy_teams/muhammadammadwaqarmalik_chiefoperatingofficer_page_2.png",
-    "pdf_name": "iotfiy_teams",
-    "page_number": 2,
-    "topic": "MuhammadAmmadWaqarMalik, ChiefOperatingOfficer"
-  },
-  {
-    "image_path": "uploads/extracted_images/iotfiy_teams/hamzaaslam_chieftechnologyofficer_cto_page_3.png",
-    "pdf_name": "iotfiy_teams",
-    "page_number": 3,
-    "topic": "HamzaAslam, ChiefTechnologyOfficer (CTO)"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1.png",
-    "pdf_name": "mushaba",
-    "page_number": 1,
-    "topic": "Mushaba: YourCompanionforHajj & Umrah"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 1,
-    "topic": "Mushaba: YourCompanionforHajj & Umrah"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushaba_yourcompanionforhajj_umrah_page_1_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 1,
-    "topic": "Mushaba: YourCompanionforHajj & Umrah"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushababringsclaritytoconfusion_connectiontoisolation_andpeaceofmindtowhat_page_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 3,
-    "topic": "Mushababringsclaritytoconfusion, connectiontoisolation, andpeaceofmindtowhat"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushababringsclaritytoconfusion_connectiontoisolation_andpeaceofmindtowhat_page_3_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 3,
-    "topic": "Mushababringsclaritytoconfusion, connectiontoisolation, andpeaceofmindtowhat"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4.png",
-    "pdf_name": "mushaba",
-    "page_number": 4,
-    "topic": "Eachgroupismanagedbyanadminwhocan:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 4,
-    "topic": "Eachgroupismanagedbyanadminwhocan:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 4,
-    "topic": "Eachgroupismanagedbyanadminwhocan:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_4.png",
-    "pdf_name": "mushaba",
-    "page_number": 4,
-    "topic": "Eachgroupismanagedbyanadminwhocan:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/eachgroupismanagedbyanadminwhocan_page_4_img_5.png",
-    "pdf_name": "mushaba",
-    "page_number": 4,
-    "topic": "Eachgroupismanagedbyanadminwhocan:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/userscantapanypinto_page_5.png",
-    "pdf_name": "mushaba",
-    "page_number": 5,
-    "topic": "Userscantapanypinto:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6.png",
-    "pdf_name": "mushaba",
-    "page_number": 6,
-    "topic": "Mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 6,
-    "topic": "Mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto_page_6_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 6,
-    "topic": "Mushabaautomaticallydetectsspokenlanguageandtranslatesitliveinto"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/whenscannedbyanyone_theqrcodedisplays_page_7.png",
-    "pdf_name": "mushaba",
-    "page_number": 7,
-    "topic": "Whenscannedbyanyone, theQRcodedisplays:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/whenscannedbyanyone_theqrcodedisplays_page_7_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 7,
-    "topic": "Whenscannedbyanyone, theQRcodedisplays:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/whenscannedbyanyone_theqrcodedisplays_page_7_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 7,
-    "topic": "Whenscannedbyanyone, theQRcodedisplays:"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8.png",
-    "pdf_name": "mushaba",
-    "page_number": 8,
-    "topic": "Userscantakeandsendreal-timephotosofsurroundings"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 8,
-    "topic": "Userscantakeandsendreal-timephotosofsurroundings"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 8,
-    "topic": "Userscantakeandsendreal-timephotosofsurroundings"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/userscantakeandsendreal_timephotosofsurroundings_page_8_img_4.png",
-    "pdf_name": "mushaba",
-    "page_number": 8,
-    "topic": "Userscantakeandsendreal-timephotosofsurroundings"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/whymushabamatters_page_12.png",
-    "pdf_name": "mushaba",
-    "page_number": 12,
-    "topic": "WhyMushabaMatters"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/whymushabamatters_page_12_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 12,
-    "topic": "WhyMushabaMatters"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_18.png",
-    "pdf_name": "mushaba",
-    "page_number": 18,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19.png",
-    "pdf_name": "mushaba",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_4.png",
-    "pdf_name": "mushaba",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_5.png",
-    "pdf_name": "mushaba",
-    "page_number": 19,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20.png",
-    "pdf_name": "mushaba",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_4.png",
-    "pdf_name": "mushaba",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_5.png",
-    "pdf_name": "mushaba",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_6.png",
-    "pdf_name": "mushaba",
-    "page_number": 20,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_21.png",
-    "pdf_name": "mushaba",
-    "page_number": 21,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_21_img_2.png",
-    "pdf_name": "mushaba",
-    "page_number": 21,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_21_img_3.png",
-    "pdf_name": "mushaba",
-    "page_number": 21,
-    "topic": "ProductbyIOTFIYSOLUTIONS"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_teams/farhanzaheerchiefoperatingofficer_coo_nucleus_page_1.png",
-    "pdf_name": "nucleus_teams",
-    "page_number": 1,
-    "topic": "FarhanZaheerChiefOperatingOfficer (COO) Nucleus"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_teams/salmanyousufchiefexecutiveofficernucleusdistribution_page_2.png",
-    "pdf_name": "nucleus_teams",
-    "page_number": 2,
-    "topic": "SalmanYousufChiefExecutiveOfficerNucleusDistribution"
-  },
-  {
-    "image_path": "uploads/extracted_images/vivanco_teams/talibhussain_countrydirector_pakistan_vivanco_page_1.png",
-    "pdf_name": "vivanco_teams",
-    "page_number": 1,
-    "topic": "TalibHussain, CountryDirector – Pakistan (VIVANCO /"
-  },
-  {
-    "image_path": "uploads/extracted_images/vivanco_teams/email_rizwan_khan_nucleus_pk_com_page_2.png",
-    "pdf_name": "vivanco_teams",
-    "page_number": 2,
-    "topic": "Email: rizwan.khan@nucleus - pk.com"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/iotfiyaiknowledgeassistantisanintelligentconversationalaiplatformthatconvertsyour_page_3.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 3,
-    "topic": "IOTFIYAIKnowledgeAssistantisanintelligentconversationalAIplatformthatconvertsyour"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/step2_trainyouraiassistant_page_4.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 4,
-    "topic": "Step2 — TrainYourAIAssistant"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/intelligentknowledgebase_page_6.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 6,
-    "topic": "IntelligentKnowledgeBase"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/createanenterpriseaiassistantwithoutwritingcode_page_7.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 7,
-    "topic": "CreateanenterpriseAIassistantwithoutwritingcode."
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/userssimplyaskquestionsnaturally_page_8.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 8,
-    "topic": "Userssimplyaskquestionsnaturally."
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/businessescandeploytheaiassistanttoprovide_page_11.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 11,
-    "topic": "BusinessescandeploytheAIassistanttoprovide:"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/industryapplications_page_12.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 12,
-    "topic": "IndustryApplications"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/hospitals_page_13.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 13,
-    "topic": "Hospitals"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/governmentorganizations_page_14.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 14,
-    "topic": "GovernmentOrganizations"
-  },
-  {
-    "image_path": "uploads/extracted_images/ai_knowledge_assistant/iotfiyaiknowledgeassistantprovidesa_scalable_secure_andfuture_readyaisolutionthat_page_18.png",
-    "pdf_name": "ai_knowledge_assistant",
-    "page_number": 18,
-    "topic": "IOTFIYAIKnowledgeAssistantprovidesa scalable, secure, andfuture-readyAIsolutionthat"
-  },
-  {
     "image_path": "uploads/extracted_images/services/gamenest_smarterarcades_iot_basedarcadeand_page_1.png",
     "pdf_name": "services",
     "page_number": 1,
@@ -2028,423 +1500,207 @@
     "topic": "Theclouddashboardactsasa commandcenterfortheentirerestaurantgroup."
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/coo_nucleusdistributionpvt_ltd_page_1.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/social_app/iotfiysolutionsproposesa_custom_built_privatesocialmediaplatform_designed_page_1.png",
+    "pdf_name": "social_app",
     "page_number": 1,
-    "topic": "(COO) NucleusDistributionPvt. Ltd."
+    "topic": "IoTFIYSolutionsproposesa custom-built, privatesocialmediaplatform , designed"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_2.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/social_app/iotfiydeliversa_dedicatedinternalsocialplatformexclusivelyforgetzpharma_page_3.png",
+    "pdf_name": "social_app",
+    "page_number": 3,
+    "topic": "IoTFIYdeliversa dedicatedinternalsocialplatformexclusivelyforGetzPharma"
+  },
+  {
+    "image_path": "uploads/extracted_images/social_app/iotfiydeliversa_dedicatedinternalsocialplatformexclusivelyforgetzpharma_page_3_img_2.png",
+    "pdf_name": "social_app",
+    "page_number": 3,
+    "topic": "IoTFIYdeliversa dedicatedinternalsocialplatformexclusivelyforGetzPharma"
+  },
+  {
+    "image_path": "uploads/extracted_images/social_app/valueforgetzpharma_page_5.png",
+    "pdf_name": "social_app",
+    "page_number": 5,
+    "topic": "ValueforGetzPharma"
+  },
+  {
+    "image_path": "uploads/extracted_images/social_app/iotfiysolutionsempowersgetzpharmawitha_privatesocialengagementecosystem_page_7.png",
+    "pdf_name": "social_app",
+    "page_number": 7,
+    "topic": "IoTFIYSolutionsempowersGetzPharmawitha privatesocialengagementecosystem"
+  },
+  {
+    "image_path": "uploads/extracted_images/studio/iotfiystudio_page_1.png",
+    "pdf_name": "studio",
+    "page_number": 1,
+    "topic": "IOTFIYStudio"
+  },
+  {
+    "image_path": "uploads/extracted_images/studio/adminsandteacherscanmonitorloginactivity_submissions_quizresults_andacademic_page_3.png",
+    "pdf_name": "studio",
+    "page_number": 3,
+    "topic": "Adminsandteacherscanmonitorloginactivity, submissions, quizresults, andacademic"
+  },
+  {
+    "image_path": "uploads/extracted_images/studio/createanduploadassignments_setdeadlines_anddistributethemtotheright_page_7.png",
+    "pdf_name": "studio",
+    "page_number": 7,
+    "topic": "Createanduploadassignments, setdeadlines, anddistributethemtotheright"
+  },
+  {
+    "image_path": "uploads/extracted_images/studio/student_focusedpractice_page_9.png",
+    "pdf_name": "studio",
+    "page_number": 9,
+    "topic": "Student-FocusedPractice"
+  },
+  {
+    "image_path": "uploads/extracted_images/tour/high_impactproblemstatements_page_2.png",
+    "pdf_name": "tour",
+    "page_number": 2,
+    "topic": "High-ImpactProblemStatements"
+  },
+  {
+    "image_path": "uploads/extracted_images/tour/ocr_textanalysis_readsdocumentsorimagesforcontextualanswers_page_4.png",
+    "pdf_name": "tour",
+    "page_number": 4,
+    "topic": "● OCR & TextAnalysis: Readsdocumentsorimagesforcontextualanswers."
+  },
+  {
+    "image_path": "uploads/extracted_images/tour/200_5_000pages_page_5.png",
+    "pdf_name": "tour",
+    "page_number": 5,
+    "topic": "(200–5,000pages)."
+  },
+  {
+    "image_path": "uploads/extracted_images/tour/aireasoninggpt_4_geminiproviaapi_page_6.png",
+    "pdf_name": "tour",
+    "page_number": 6,
+    "topic": "AIReasoningGPT-4 / GeminiProviaAPI"
+  },
+  {
+    "image_path": "uploads/extracted_images/vivanco_teams/talibhussain_countrydirector_pakistan_vivanco_page_1.png",
+    "pdf_name": "vivanco_teams",
+    "page_number": 1,
+    "topic": "TalibHussain, CountryDirector – Pakistan (VIVANCO /"
+  },
+  {
+    "image_path": "uploads/extracted_images/vivanco_teams/email_rizwan_khan_nucleus_pk_com_page_2.png",
+    "pdf_name": "vivanco_teams",
+    "page_number": 2,
+    "topic": "Email: rizwan.khan@nucleus - pk.com"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_distribution/nucleusdistributionpvtltd_page_2.png",
+    "pdf_name": "nucleus_distribution",
     "page_number": 2,
     "topic": "NucleusDistributionPvtLtd"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/talibhussain_countrydirector_pakistan_vivanco_page_3.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 3,
-    "topic": "TalibHussain, CountryDirector – Pakistan (VIVANCO /"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/email_rizwan_khan_nucleus_pk_com_page_4.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/ac/centralizedacdashboard_page_4.png",
+    "pdf_name": "ac",
     "page_number": 4,
-    "topic": "Email: rizwan.khan@nucleus - pk.com"
+    "topic": "CentralizedACDashboard"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat_64_pairu_utpcable_pvc_23awg_305mbox_page_6.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 6,
-    "topic": "VivancoCat - 64 PairU/UTPCable, PVC, 23AWG, 305MBox"
+    "image_path": "uploads/extracted_images/easy_solar/problemstatement_page_2.png",
+    "pdf_name": "easy_solar",
+    "page_number": 2,
+    "topic": "ProblemStatement"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancosimplex_duplexfaceplate_page_7.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 7,
-    "topic": "VivancoSimplex/DuplexFaceplate"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6u_utp_frameonly_page_8.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 8,
-    "topic": "VivancoPatchPanel24PortCat - 6U/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6u_utp_frameonly_page_8_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 8,
-    "topic": "VivancoPatchPanel24PortCat - 6U/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocopperpatchcordcat_6u_utp_page_9.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 9,
-    "topic": "VivancoCopperPatchCordCat - 6U/UTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocopperpatchcordcat_6u_utp_page_9_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 9,
-    "topic": "VivancoCopperPatchCordCat - 6U/UTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancosimplex_duplexfaceplate_page_10.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 10,
-    "topic": "VivancoSimplex/DuplexFaceplate"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6f_utp_frameonly_page_11.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 11,
-    "topic": "VivancoPatchPanel24PortCat - 6F/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6f_utp_frameonly_page_11_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 11,
-    "topic": "VivancoPatchPanel24PortCat - 6F/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocopperpatchcordcat_6f_utp_page_12.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 12,
-    "topic": "VivancoCopperPatchCordCat - 6F/UTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocopperpatchcordcat_6f_utp_page_12_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 12,
-    "topic": "VivancoCopperPatchCordCat - 6F/UTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat_6atoollesskeystonejackunshielded_page_13.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 13,
-    "topic": "VivancoCat - 6AToolLessKeystoneJackUnshielded"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6au_utp_frameonly_page_14.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 14,
-    "topic": "VivancoPatchPanel24PortCat - 6AU/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6au_utp_frameonly_page_14_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 14,
-    "topic": "VivancoPatchPanel24PortCat - 6AU/UTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat_6a4_pairs_ftpcable_pvc_23awg_grey305mroll_page_15.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 15,
-    "topic": "VivancoCat - 6A4 PairS/FTPCable, PVC, 23AWG, Grey305MRoll"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6s_ftp_frameonly_page_16.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 16,
-    "topic": "VivancoPatchPanel24PortCat - 6S/FTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancopatchpanel24portcat_6s_ftp_frameonly_page_16_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 16,
-    "topic": "VivancoPatchPanel24PortCat - 6S/FTP (FrameOnly)"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocopperpatchcordcat_6as_ftp_page_17.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 17,
-    "topic": "VivancoCopperPatchCordCat - 6AS/FTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocopperpatchcordcat_6as_ftp_page_17_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 17,
-    "topic": "VivancoCopperPatchCordCat - 6AS/FTP"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vericom24portcat8_shieldedpatchpanel_withdustcap_page_18.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 18,
-    "topic": "Vericom24portCat8 shieldedpatchpanel, withdustcap"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vericom24portcat8_shieldedpatchpanel_withdustcap_page_18_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 18,
-    "topic": "Vericom24portCat8 shieldedpatchpanel, withdustcap"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberopticarmoredcablesinglemodewithsteeltape_pesheath_page_19.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19.png",
+    "pdf_name": "mushaba",
     "page_number": 19,
-    "topic": "VivancoFiberOpticArmoredCableSingleModewithSteelTape & PESheath"
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberopticarmoredcablesinglemodewithsteeltape_pesheath_page_19_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 19,
-    "topic": "VivancoFiberOpticArmoredCableSingleModewithSteelTape & PESheath"
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancoindoortightbufferopticalfibercablesinglemode_page_20.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_3.png",
+    "pdf_name": "mushaba",
+    "page_number": 19,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_4.png",
+    "pdf_name": "mushaba",
+    "page_number": 19,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_5.png",
+    "pdf_name": "mushaba",
+    "page_number": 19,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_19_img_6.png",
+    "pdf_name": "mushaba",
+    "page_number": 19,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20.png",
+    "pdf_name": "mushaba",
     "page_number": 20,
-    "topic": "VivancoIndoorTightBufferOpticalFiberCableSingleMode"
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancoindoortightbufferopticalfibercablesinglemode_page_20_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 20,
-    "topic": "VivancoIndoorTightBufferOpticalFiberCableSingleMode"
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberopticlc_pcduplexcoupler_page_21.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_3.png",
+    "pdf_name": "mushaba",
+    "page_number": 20,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_4.png",
+    "pdf_name": "mushaba",
+    "page_number": 20,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_5.png",
+    "pdf_name": "mushaba",
+    "page_number": 20,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_20_img_6.png",
+    "pdf_name": "mushaba",
+    "page_number": 20,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
+  },
+  {
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_21.png",
+    "pdf_name": "mushaba",
     "page_number": 21,
-    "topic": "VivancoFiberOpticLC/PCDuplexCoupler"
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberopticlc_pcduplexcoupler_page_21_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_21_img_2.png",
+    "pdf_name": "mushaba",
     "page_number": 21,
-    "topic": "VivancoFiberOpticLC/PCDuplexCoupler"
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberpatchcordduplex_page_22.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 22,
-    "topic": "VivancoFiberPatchCordDuplex"
+    "image_path": "uploads/extracted_images/mushaba/productbyiotfiysolutions_page_21_img_3.png",
+    "pdf_name": "mushaba",
+    "page_number": 21,
+    "topic": "ProductbyIOTFIYSOLUTIONS"
   },
   {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberpatchcordduplex_page_22_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 22,
-    "topic": "VivancoFiberPatchCordDuplex"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancofiberpatchcordmto_page_23.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 23,
-    "topic": "VivancoFiberPatchCordMTO"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/inadditiontoourinnovativedesign_engineering_andmanufacturingcapabilitiesvericomis_page_24.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 24,
-    "topic": "Inadditiontoourinnovativedesign, engineering, andmanufacturingcapabilitiesVericomis"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/theencloseddesignuseshot_aisle_cold_aislecontainmentprinciplestoimprovecooling_page_26.png",
-    "pdf_name": "nucleus_vericomandteams",
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_26.png",
+    "pdf_name": "nucleus_vericom",
     "page_number": 26,
-    "topic": "Theencloseddesignuseshot - aisle/cold - aislecontainmentprinciplestoimprovecooling"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/accesscontrol_andothercriticalparametersinrealtime_page_28.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 28,
-    "topic": "accesscontrol, andothercriticalparametersinrealtime."
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_30.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 30,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_30_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 30,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_30_img_3.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 30,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_30_img_4.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 30,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_30_img_5.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 30,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_32.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 32,
     "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_35.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 35,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_37.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 37,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_38.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 38,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_39.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 39,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_40.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 40,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_41.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 41,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_42.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 42,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_43.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 43,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_44.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 44,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_45.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 45,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_45_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 45,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_47.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 47,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_48.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 48,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_49.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 49,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_50.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 50,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_51.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 51,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_51_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 51,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_52.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 52,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_52_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 52,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_53.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 53,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_31.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 31,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_31_img_2.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 31,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/vivancocat6_s_ftpshieldedcoppercable_page_31_img_3.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 31,
-    "topic": "VIVANCOCAT6 S/FTPShieldedCopperCable"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_34.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 34,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_36.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 36,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/nucleusdistributionpvtltd_page_46.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 46,
-    "topic": "NucleusDistributionPvtLtd"
-  },
-  {
-    "image_path": "uploads/extracted_images/nucleus_vericomandteams/tel_9221_34811196email_sales_nucleus_pk_com_page_54.png",
-    "pdf_name": "nucleus_vericomandteams",
-    "page_number": 54,
-    "topic": "Tel: (+9221) 34811196Email: sales@nucleus - pk.com"
   }
 ]
