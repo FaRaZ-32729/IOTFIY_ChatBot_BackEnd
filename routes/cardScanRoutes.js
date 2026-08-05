@@ -1,4 +1,4 @@
-import express from "express";
+  import express from "express";
 import multer from "multer";
 import fs from "fs/promises";
 import path from "path";
@@ -82,17 +82,39 @@ function mapToCardData(fields) {
   };
 
   return {
-    firstName: pick("first_name", "firstname", "given_name", "first name"),
-    lastName: pick("last_name", "lastname", "surname", "family_name", "last name"),
-    fullName: pick("name", "full_name", "fullname", "contact_name"),
-    company: pick("company", "company_name", "organization", "organisation", "employer"),
-    designation: pick("designation", "job_title", "jobtitle", "job_position", "position", "title", "role"),
-    jobTitle: pick("job_title", "jobtitle", "job_position", "position", "title", "role", "designation"),
-    email: pick("email", "email_address", "e_mail", "mail"),
-    phone: pick("phone_number", "phone", "mobile", "tel", "telephone", "contact_number", "cell"),
-    website: pick("website", "url", "web", "linkedin"),
-    address: pick("address", "location", "city", "country"),
+    firstName: pick("first_name", "firstname", "given_name", "first name", "fname"),
+    lastName: pick("last_name", "lastname", "surname", "family_name", "last name", "lname"),
+    fullName: pick("name", "full_name", "fullname", "contact_name", "person_name", "owner_name"),
+    company: pick("company", "company_name", "company_names", "organization", "organisation", "employer", "business_name"),
+    designation: pick("designation", "job_title", "jobtitle", "job_position", "position", "title", "role", "occupation"),
+    jobTitle: pick("job_title", "jobtitle", "job_position", "position", "title", "role", "designation", "occupation"),
+    email: pick("email", "email_address", "email_addresses", "e_mail", "mail", "emails"),
+    phone: pick("phone_number", "phone_numbers", "phone", "mobile", "mobile_number", "tel", "telephone", "contact_number", "cell", "fax"),
+    website: pick("website", "url", "web", "linkedin", "website_url"),
+    address: pick("address", "location", "city", "country", "street", "full_address"),
   };
+}
+
+function cardDataFromFieldList(fieldList) {
+  const mapped = mapToCardData(fieldList);
+  if (!mapped.firstName && !mapped.lastName && mapped.fullName) {
+    const parts = mapped.fullName.trim().split(/\s+/);
+    mapped.firstName = parts[0] || "";
+    mapped.lastName = parts.slice(1).join(" ") || "";
+  }
+  return mapped;
+}
+
+function hasUsableCardData(cardData, fieldList = []) {
+  const hasMapped = Boolean(
+    cardData?.fullName ||
+    cardData?.firstName ||
+    cardData?.lastName ||
+    cardData?.phone ||
+    cardData?.email
+  );
+  if (hasMapped) return true;
+  return fieldList.some((field) => String(field?.value || "").trim().length > 0);
 }
 
 function parseCardTextFallback(text) {
@@ -479,26 +501,12 @@ router.post("/", async (req, res) => {
     const allFields = extractAllFields(prediction);
     console.log(`Extracted ${allFields.length} field(s) via SDK`);
 
-    let cardData = mapToCardData(allFields);
+    let cardData = cardDataFromFieldList(allFields);
 
-    if (!cardData.firstName && !cardData.lastName && cardData.fullName) {
-      const parts = cardData.fullName.trim().split(/\s+/);
-      cardData.firstName = parts[0] || "";
-      cardData.lastName = parts.slice(1).join(" ") || "";
-    }
-
-    let fieldList = allFields.length > 0
-      ? allFields
-      : [];
+    let fieldList = allFields.length > 0 ? allFields : [];
 
     let summaryText = fieldList.map((f) => `${f.label}: ${f.value}`).join("\n");
 
-    // ✅ FIX: Only run the regex-based fallback parser when the SDK actually
-    // returned real fields. response.inference.toString() (rawDisplayText)
-    // was being fed in here previously — when Mindee found nothing, that
-    // string contains schema/placeholder text (e.g. ":company:", sample
-    // names) which the regex fallback happily misread as real card data.
-    // That's why empty scans were producing fake name/phone/company values.
     if (allFields.length > 0 && summaryText.trim()) {
       const fallbackData = parseCardTextFallback(summaryText);
       cardData = mergeCardData(cardData, fallbackData);
@@ -513,17 +521,11 @@ router.post("/", async (req, res) => {
       }
     }
 
-    // ✅ Consider it "no data" if none of the essential fields exist,
-    // or if the SDK never found any fields at all.
-    const hasMeaningfulData = Boolean(
-      cardData.fullName ||
-      cardData.firstName ||
-      cardData.lastName ||
-      cardData.phone ||
-      cardData.email
-    );
+    cardData = cardDataFromFieldList(fieldList.length ? fieldList : allFields);
 
-    if (allFields.length === 0 || !summaryText.trim() || !hasMeaningfulData) {
+    const meaningful = hasUsableCardData(cardData, fieldList);
+
+    if (!meaningful) {
       console.log("⚠️ No usable data extracted — reporting noData to client.");
       return res.json({
         success: true,
@@ -532,12 +534,17 @@ router.post("/", async (req, res) => {
           text: summaryText || "",
           displayText: "No data could be extracted. Try a clearer photo.",
           fields: fieldList,
-          noData: true, // 👈 explicit flag
+          noData: true,
         },
       });
     }
 
-    console.log("✅ SDK Extraction successful!");
+    console.log("✅ SDK Extraction successful!", {
+      name: cardData.fullName || `${cardData.firstName} ${cardData.lastName}`.trim(),
+      phone: cardData.phone,
+      email: cardData.email,
+      fieldCount: fieldList.length,
+    });
 
     res.json({
       success: true,
