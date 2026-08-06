@@ -9,9 +9,10 @@ import {
   SUBMIT_LEAD_TOOL,
 } from "./liveSystemPrompt.js";
 import {
-  enrichQueryForLive,
   clearLiveRagSession,
   pickImagesForLive,
+  resolveImagePdfTopic,
+  inferTopicFromAssistantSpeech,
 } from "./liveRagService.js";
 
 const FALLBACK_LIVE_MODELS = [
@@ -40,7 +41,60 @@ const topicDispatchedThisTurn = new Map();
 const currentTurnTopic = new Map();
 // True once we sent page-matched images for this turn (not whole-PDF dump)
 const imagesFocusedThisTurn = new Map();
-const pendingPdfBaselineTimer = new Map();
+
+/** Strip hidden Gemini markers before using response text for image search. */
+function stripAssistantMarkers(text) {
+  return String(text || "")
+    .replace(/\[\[TOPIC:\s*[^\]]+?\]\]/gi, " ")
+    .replace(/\[\[SHOW_IMAGE:\d+\]\]/g, " ")
+    .replace(/\[\[REF_ID:\s*[^\]]+?\]\]/gi, " ")
+    .replace(/\[SHOW_LEAD_FORM.*?\]/gi, " ")
+    .replace(/\[ACTIVATE_CAMERA\]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Images come ONLY from Gemini's spoken/written response — not the user question.
+ * Topic = [[TOPIC: X]] from response, or inferred from response content.
+ */
+function dispatchImagesFromGeminiResponse(clientWs, sessionId, assistantRawText, topicHint = null) {
+  const speech = stripAssistantMarkers(assistantRawText);
+  if (!speech || speech.length < 6) return false;
+
+  let topic = topicHint || currentTurnTopic.get(sessionId) || null;
+  if (!topic || topic.toLowerCase() === "general") {
+    topic = inferTopicFromAssistantSpeech(speech);
+  }
+  if (!topic || topic.toLowerCase() === "general") return false;
+
+  currentTurnTopic.set(sessionId, topic);
+  const resolvedTopic = resolveImagePdfTopic(topic, speech);
+
+  let images = pickImagesForLive(speech, resolvedTopic, {
+    allowPdfBaseline: false,
+    limit: 8,
+  });
+  if (!images.length) {
+    images = pickImagesForLive(speech, resolvedTopic, {
+      allowPdfBaseline: true,
+      limit: 6,
+    });
+  }
+  if (!images.length) return false;
+
+  const key = images.map((img) => img.image_path || img.url).join("|");
+  if (imagesFocusedThisTurn.get(sessionId) === key) return false;
+
+  console.log(
+    `🖼️  [GEMINI-RESPONSE] topic="${topic}" | speech="${speech.slice(0, 90)}" → ${images.length} image(s)`
+  );
+  if (sendImagePayload(clientWs, images)) {
+    imagesFocusedThisTurn.set(sessionId, key);
+    return true;
+  }
+  return false;
+}
 
 function sendJson(ws, payload) {
   if (ws.readyState === ws.OPEN) {
@@ -150,74 +204,6 @@ function sendImagePayload(clientWs, payload) {
     replace: true,
   });
   return true;
-}
-
-function dispatchLiveImages(clientWs, sessionId, text, pdfFilter = null) {
-  enrichQueryForLive(sessionId, text, {
-    pdfFilter,
-    onImages: (payload) => {
-      if (sendImagePayload(clientWs, payload)) {
-        imagesFocusedThisTurn.set(sessionId, true);
-      }
-    },
-  });
-}
-
-/**
- * Re-rank images using ONLY the assistant's spoken response.
- * Can update once a stronger/more specific match appears mid-turn.
- */
-function refineImagesFromAssistantSpeech(clientWs, sessionId, assistantText, pdfFilter) {
-  if (!pdfFilter) return;
-  if (!assistantText || assistantText.trim().length < 12) return;
-
-  const focused = pickImagesForLive(assistantText, pdfFilter, {
-    allowPdfBaseline: false,
-    limit: 8,
-  });
-  if (!focused.length) return;
-
-  // Avoid re-sending the exact same set
-  const key = focused.map((img) => img.image_path || img.url).join("|");
-  const prevKey = imagesFocusedThisTurn.get(sessionId);
-  if (prevKey === key) return;
-
-  console.log(
-    `🎯 [ASSISTANT-REFINE] topic="${pdfFilter}" → ${focused.length} image(s) from AI speech`
-  );
-  if (sendImagePayload(clientWs, focused)) {
-    imagesFocusedThisTurn.set(sessionId, key);
-    const pending = pendingPdfBaselineTimer.get(sessionId);
-    if (pending) {
-      clearTimeout(pending);
-      pendingPdfBaselineTimer.delete(sessionId);
-    }
-  }
-}
-
-function schedulePdfBaselineFallback(clientWs, sessionId, pdfFilter) {
-  const prev = pendingPdfBaselineTimer.get(sessionId);
-  if (prev) clearTimeout(prev);
-
-  // If assistant speech never yields a page match, show PDF images after a short wait
-  const timer = setTimeout(() => {
-    pendingPdfBaselineTimer.delete(sessionId);
-    if (imagesFocusedThisTurn.get(sessionId)) return;
-    const baseline = pickImagesForLive(pdfFilter, pdfFilter, {
-      allowPdfBaseline: true,
-      limit: 8,
-    });
-    if (baseline.length) {
-      console.log(`🖼️  [PDF-FALLBACK] topic="${pdfFilter}" → ${baseline.length} baseline image(s)`);
-      sendImagePayload(clientWs, baseline);
-      imagesFocusedThisTurn.set(
-        sessionId,
-        baseline.map((img) => img.image_path || img.url).join("|")
-      );
-    }
-  }, 3500);
-
-  pendingPdfBaselineTimer.set(sessionId, timer);
 }
 
 async function connectLiveSession(ai, preferredModel, config, callbacks) {
@@ -338,19 +324,12 @@ export async function attachClientToGemini(clientWs, sessionId) {
           if (!topicDispatchedThisTurn.get(sessionId) && topic.toLowerCase() !== "general") {
             topicDispatchedThisTurn.set(sessionId, true);
             imagesFocusedThisTurn.delete(sessionId);
-
-            // Do NOT search images from the user question — it mismatches
-            // (e.g. "Malik" → both Jawwad + Ammad). Wait for AI speech below.
-            const userQuestion = (userUtteranceBuffer.get(sessionId) || "").trim();
-            console.log(
-              `🎯 [TOPIC-MARKER] topic="${topic}" | userQ="${userQuestion.slice(0, 80)}" — waiting for AI speech to pick images`
-            );
             userUtteranceBuffer.set(sessionId, "");
 
-            // If AI speech never yields a page match, show PDF baseline later
-            schedulePdfBaselineFallback(clientWs, sessionId, topic);
+            console.log(`🎯 [TOPIC-FROM-RESPONSE] topic="${topic}"`);
 
-            // 👇 NAYA: per-topic count badhao
+            dispatchImagesFromGeminiResponse(clientWs, sessionId, newBuffer, topic);
+
             const normalizedTopic = topic.toLowerCase().trim();
             const stats = liveSessionStats.get(sessionId) || { topic_counts: {} };
             stats.topic_counts[normalizedTopic] = (stats.topic_counts[normalizedTopic] || 0) + 1;
@@ -358,22 +337,22 @@ export async function attachClientToGemini(clientWs, sessionId) {
 
             console.log(`📊 [TOPIC-COUNT] "${normalizedTopic}" → ${stats.topic_counts[normalizedTopic]}`, JSON.stringify(stats.topic_counts));
 
-            // DB mein persist karo (taake session drop hone pe count na khoye)
             saveLead({ sessionId, topic_counts: stats.topic_counts }).catch((err) =>
               console.warn("Topic count save error:", err.message)
             );
 
           } else if (topic.toLowerCase() === "general") {
-            // No product images for general chat — drop stale utterance
             userUtteranceBuffer.set(sessionId, "");
           }
         }
 
-        // ONLY source of truth for which image(s) to show: AI spoken response
-        const activeTopic = currentTurnTopic.get(sessionId);
-        if (activeTopic && activeTopic.toLowerCase() !== "general") {
-          refineImagesFromAssistantSpeech(clientWs, sessionId, newBuffer, activeTopic);
-        }
+        // Images: sirf Gemini ke response text se — user question se nahi
+        dispatchImagesFromGeminiResponse(
+          clientWs,
+          sessionId,
+          newBuffer,
+          currentTurnTopic.get(sessionId)
+        );
 
         // 1. Check for [[SHOW_IMAGE:X]]
         const imageMatch = newBuffer.match(/\[\[SHOW_IMAGE:(\d+)\]\]/);
@@ -464,17 +443,20 @@ export async function attachClientToGemini(clientWs, sessionId) {
 
       if (sc.turnComplete) {
         assistantSpeaking = false;
+
+        const finalResponse = assistantOutputBuffer.get(sessionId) || "";
+        dispatchImagesFromGeminiResponse(
+          clientWs,
+          sessionId,
+          finalResponse,
+          currentTurnTopic.get(sessionId)
+        );
+
         sendJson(clientWs, { type: "turn_complete" });
-        assistantOutputBuffer.set(sessionId, ""); // Clear buffer for next turn
-        //new
-        topicDispatchedThisTurn.set(sessionId, false);   // 👈 add this
+        assistantOutputBuffer.set(sessionId, "");
+        topicDispatchedThisTurn.set(sessionId, false);
         currentTurnTopic.delete(sessionId);
         imagesFocusedThisTurn.delete(sessionId);
-        const pending = pendingPdfBaselineTimer.get(sessionId);
-        if (pending) {
-          clearTimeout(pending);
-          pendingPdfBaselineTimer.delete(sessionId);
-        }
       }
     },
     onerror: (err) => {
@@ -525,7 +507,6 @@ export async function attachClientToGemini(clientWs, sessionId) {
 
       if (msg.type === "text" && msg.text) {
         mergeLeadDraft(sessionId, msg.text, clientWs);
-        dispatchLiveImages(clientWs, sessionId, msg.text);
         geminiSession?.sendClientContent({
           turns: [{ role: "user", parts: [{ text: msg.text }] }],
           turnComplete: true,
@@ -555,14 +536,9 @@ export async function attachClientToGemini(clientWs, sessionId) {
     clearLiveRagSession(sessionId);
     userUtteranceBuffer.delete(sessionId);
     //new
-    topicDispatchedThisTurn.delete(sessionId);   // 👈 add
+    topicDispatchedThisTurn.delete(sessionId);
     currentTurnTopic.delete(sessionId);
     imagesFocusedThisTurn.delete(sessionId);
-    const pending = pendingPdfBaselineTimer.get(sessionId);
-    if (pending) {
-      clearTimeout(pending);
-      pendingPdfBaselineTimer.delete(sessionId);
-    }
     leadDraftBySession.delete(sessionId);
     leadFormShownBySession.delete(sessionId);
     if (topicDebounceTimers.has(sessionId)) {

@@ -47,6 +47,14 @@ Do NOT default to "iotfiy_gateway" for general IOTFIY questions — use "iotfiy"
   Answer ONLY from the AI Knowledge Assistant document content — do NOT give a generic Gravitas one-liner. Explain what the AI Knowledge Assistant is, what it does, and key features from that document.
   Always emit [[TOPIC: ai_knowledge_assistant]] for these questions (NOT [[TOPIC: General]] and NOT [[TOPIC: iotfiy]]).
 
+- "mushaba" / Hajj / Umrah / pilgrim app / navigation for pilgrims → [[TOPIC: mushaba]] (main Mushaba product PDF).
+  Do NOT use [[TOPIC: tour]] for general Mushaba/Hajj/Umrah questions — "tour" is a separate feature-walkthrough document only.
+- "mushaba_rag" → ONLY when user explicitly asks about Mushaba RAG / retrieval / technical RAG document.
+- "tour" → ONLY when user asks about the interactive product tour / feature walkthrough slides, NOT for general Mushaba product questions.
+
+- "iotfiyclients" = IOTFIY Clients / case studies PDF. Use when user asks about IoTFIY clients, client projects, collaborations, Power2GO, K-Electric, GameNest, GetzPharma, PSO, IT Park clients, etc.
+  Always emit [[TOPIC: iotfiyclients]] for client/case-study questions (NOT [[TOPIC: iotfiy]] or [[TOPIC: iotfiy_solutions]]).
+
 
 COMPANY CONTEXT:
 ${context || "No PDF context loaded yet."}
@@ -55,13 +63,17 @@ FULL DOCUMENT TOPIC INDEXES:
 ${topicIndexes || "No topic index loaded yet."}
 
 RULE 0 (CRITICAL FOR IMAGE SYNC):
-Har response ke shuru mein exactly is format mein topic likho, topic ki value upar di gayi "AVAILABLE TOPICS" list ke quoted KEY (left side) se EXACT copy karo — koi naya naam mat banao:
+Har response ke shuru mein exactly is format mein topic likho — yeh topic user ke sawal se nahi, aapke isi response ki content se match hona chahiye:
 
 [[TOPIC: iotfiy_gateway]]
 ya
 [[TOPIC: iotfiy]]
 ya
 [[TOPIC: General]]
+
+Frontend images SIRF aapke spoken response se show hoti hain — response mein jo product/client/feature discuss karo usi ka [[TOPIC: ...]] lagao.
+Example: user ne Mushaba pucha → aap Mushaba explain karo → [[TOPIC: mushaba]] + response mein "Hajj", "Umrah", "pilgrim" bolo → wahi images dikhengi.
+Example: user ne clients pucha → [[TOPIC: iotfiyclients]] + response mein "GetzPharma", "Power2GO" jaisa client naam bolo → us client ki image dikhegi.
 
 Agar user general/unrelated baat kar raha hai to "[[TOPIC: General]]" likho.
 Yeh marker hidden hoga, user ko nahi sunana hai.

@@ -95,7 +95,63 @@ const WEAK_MATCH_TOKENS = new Set([
   "malik", "muhammad", "mohammad", "ahmed", "khan", "ali", "hassan", "hussain",
   "chief", "officer", "executive", "operating", "technology", "company",
   "team", "iotfiy", "solutions", "about", "with", "from", "our", "the",
+  "app", "hai", "ke", "liye", "aur", "theek", "acha", "sawal", "batao",
 ]);
+
+/** Urdu/English buffer phrases Gemini uses — strip before image token match. */
+const SPEECH_FILLER_PATTERN =
+  /\b(acha sawal hai|bilkul sahi|great question|sure thing|give me (?:a )?moment|happy to help|absolutely|of course|ek second|ji bilkul|theek hai|suniye|batata hoon|batati hoon|zaroor|good one|let me think|pull that up)\b/gi;
+
+/** When Gemini picks the wrong [[TOPIC: ...]], remap using query content. */
+const TOPIC_REMAP_RULES = [
+  {
+    from: "tour",
+    when: /mushaba|moshaba|mashaba|hajj|umrah|pilgrim|haram|kaaba|makkah|madinah|pilgrimage/i,
+    to: "mushaba",
+  },
+  {
+    from: "mushaba_rag",
+    when: /^(?!.*\brag\b).*mushaba|hajj|umrah|pilgrim/i,
+    to: "mushaba",
+  },
+  {
+    from: "iotfiy_gateway",
+    when: /^(?!.*gateway).*iotfiy|about iotfiy|what does iotfiy|iotfiy products/i,
+    to: "iotfiy",
+  },
+];
+
+/** Gemini [[TOPIC: X]] values that must not be overridden by speech text heuristics. */
+const PROTECTED_IMAGE_TOPICS = new Set([
+  "iotfiyclients",
+  "iotfiy_teams",
+  "nucleus_teams",
+  "vivanco_teams",
+  "ai_knowledge_assistant",
+  "iotfiy_gateway",
+  "mushaba",
+  "mushaba_rag",
+  "nucleus_distribution",
+  "nucleus_vericom",
+  "polekit",
+  "packtrack",
+  "ac",
+  "easy_solar",
+  "epsn",
+  "sales_hub",
+  "services",
+  "social_app",
+  "studio",
+  "ecosystem",
+  "iotfiy",
+]);
+
+function stripSpeechFillers(text) {
+  return String(text || "")
+    .replace(SPEECH_FILLER_PATTERN, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 /** ASR / nickname variants → metadata tokens */
 const TOKEN_ALIASES = {
@@ -104,6 +160,14 @@ const TOKEN_ALIASES = {
   jawad: ["jawwad"],
   jawwad: ["jawad"],
   hamza: ["hamzah"],
+  getz: ["getzpharma"],
+  getzpharma: ["getz"],
+  gamenest: ["arcade", "vending"],
+  power2go: ["power"],
+  kelectric: ["electric", "polekit"],
+  pso: ["fume", "hood"],
+  clients: ["client"],
+  client: ["clients"],
 };
 
 function tokenVariants(token) {
@@ -120,9 +184,11 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
   const entries = getImageMetadata();
   if (!Array.isArray(entries) || !entries.length || !query?.trim()) return [];
 
-  const qTokens = tokenize(query);
+  const cleanedQuery = stripSpeechFillers(query);
+  const qTokens = tokenize(cleanedQuery);
   if (qTokens.length < 1) return [];
 
+  const filterKey = normalizeKey(pdfFilter);
   const scored = [];
 
   for (const entry of entries) {
@@ -131,20 +197,17 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
     const topicKey = normalizeKey(entry.topic);
     const pathKey = normalizeKey(entry.image_path);
     const pdfKey = normalizeKey(entry.pdf_name);
-    // Prefer word tokens from CamelCase topics — avoids "ammad" matching inside "muhammad"
     const hayTokens = new Set([
       ...richTokenize(entry.topic || ""),
       ...richTokenize(entry.pdf_name || ""),
-      ...tokenize(String(entry.image_path || "").replace(/[_\-/./\\]+/g, " ")),
+      ...tokenize(String(entry.image_path || "").replace(/[_\-./\\]+/g, " ")),
     ]);
 
     let strongHits = 0;
     let weakHits = 0;
 
     for (const raw of qTokens) {
-      if (pdfKey.includes(raw) || (pdfFilter && normalizeKey(pdfFilter).includes(raw))) {
-        continue;
-      }
+      const isPdfNameToken = raw === pdfKey || raw === filterKey;
 
       let matched = false;
       for (const t of tokenVariants(raw)) {
@@ -152,9 +215,7 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
           matched = true;
           break;
         }
-        // Path filenames are concatenated lowercase. Strip "muhammad" first so
-        // "ammad" does not false-match inside "muhammadJawwad...".
-        if (t.length >= 5) {
+        if (t.length >= 4) {
           const cleanedPath = pathKey.replace(/muhammad/g, "").replace(/mohammad/g, "");
           const cleanedTopic = topicKey.replace(/muhammad/g, "").replace(/mohammad/g, "");
           if (cleanedPath.includes(t) || cleanedTopic.includes(t)) {
@@ -165,11 +226,15 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
       }
       if (!matched) continue;
 
-      if (WEAK_MATCH_TOKENS.has(raw)) weakHits += 1;
-      else strongHits += 1;
+      if (isPdfNameToken) {
+        strongHits += 2;
+      } else if (WEAK_MATCH_TOKENS.has(raw)) {
+        weakHits += 1;
+      } else {
+        strongHits += 1;
+      }
     }
 
-    // Need at least one distinctive hit — "Malik" alone must not match both brothers
     if (strongHits <= 0 && weakHits < 3) continue;
 
     const score = strongHits * 10 + weakHits;
@@ -187,7 +252,8 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
   scored.sort((a, b) => b.score - a.score || a.page - b.page);
 
   const bestScore = scored[0].score;
-  const focused = scored.filter((row) => row.score === bestScore);
+  const bestPage = scored[0].page;
+  const focused = scored.filter((row) => row.score === bestScore && row.page === bestPage);
 
   const unique = [];
   const seen = new Set();
@@ -200,6 +266,26 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
   return unique;
 }
 
+/** Fix wrong Gemini [[TOPIC: ...]] using user question + assistant speech. */
+export function resolveImagePdfTopic(pdfFilter, query = "") {
+  const topic = String(pdfFilter || "").trim().toLowerCase();
+  const q = stripSpeechFillers(query);
+  if (!topic || topic === "general") return pdfFilter;
+
+  if (PROTECTED_IMAGE_TOPICS.has(topic)) {
+    return pdfFilter;
+  }
+
+  for (const rule of TOPIC_REMAP_RULES) {
+    if (topic === rule.from && rule.when.test(q)) {
+      console.log(`🔀 [TOPIC-REMAP] "${topic}" → "${rule.to}" (query signals product)`);
+      return rule.to;
+    }
+  }
+
+  return pdfFilter;
+}
+
 /**
  * Pick images for a Live turn.
  * @param {string} query - user question and/or assistant speech
@@ -209,26 +295,42 @@ function rankImagesInPdf(query, pdfFilter, limit = 8) {
 export function pickImagesForLive(query, pdfFilter = null, options = {}) {
   const limit = options.limit ?? 8;
   const allowPdfBaseline = options.allowPdfBaseline !== false;
+  const resolvedFilter = pdfFilter ? resolveImagePdfTopic(pdfFilter, query) : pdfFilter;
 
-  if (pdfFilter) {
-    const ranked = rankImagesInPdf(query, pdfFilter, limit);
+  if (resolvedFilter) {
+    let ranked = rankImagesInPdf(query, resolvedFilter, limit);
+
+    if (!ranked.length && resolvedFilter !== pdfFilter) {
+      ranked = rankImagesInPdf(query, pdfFilter, limit);
+    }
+
+    if (!ranked.length) {
+      const focus = detectQueryFocus(stripSpeechFillers(query));
+      if (focus && normalizeKey(focus) !== normalizeKey(resolvedFilter)) {
+        ranked = rankImagesInPdf(query, focus, limit);
+        if (ranked.length) {
+          console.log(
+            `🔍 LOCAL SEARCH: Query = "${String(query).slice(0, 80)}" | pdfFilter = "${pdfFilter}" → "${focus}" | ranked ${ranked.length} images`
+          );
+          return ranked;
+        }
+      }
+    }
+
     if (ranked.length) {
       console.log(
-        `🔍 LOCAL SEARCH: Query = "${String(query).slice(0, 80)}" | pdfFilter = "${pdfFilter}" | ranked ${ranked.length} page-matched images`
+        `🔍 LOCAL SEARCH: Query = "${String(query).slice(0, 80)}" | pdfFilter = "${pdfFilter}"${resolvedFilter !== pdfFilter ? ` → "${resolvedFilter}"` : ""} | ranked ${ranked.length} page-matched images`
       );
       return ranked;
     }
 
     if (!allowPdfBaseline) {
-      console.log(
-        `🔍 LOCAL SEARCH: Query = "${String(query).slice(0, 80)}" | pdfFilter = "${pdfFilter}" | no page match yet`
-      );
       return [];
     }
 
-    const fallback = imagesForPdf(pdfFilter, limit);
+    const fallback = imagesForPdf(resolvedFilter, limit);
     console.log(
-      `🔍 LOCAL SEARCH: Query = "${String(query).slice(0, 80)}" | pdfFilter = "${pdfFilter}" | PDF baseline ${fallback.length} images`
+      `🔍 LOCAL SEARCH: Query = "${String(query).slice(0, 80)}" | pdfFilter = "${resolvedFilter}" | PDF baseline ${fallback.length} images`
     );
     return fallback;
   }
@@ -256,21 +358,31 @@ function withTimeout(promise, ms) {
 }
 
 function detectQueryFocus(text) {
-  const lower = text.toLowerCase();
+  const lower = stripSpeechFillers(text).toLowerCase();
   const stripped = lower.replace(/\s+/g, "");
 
-  if (/mushaba|moshaba|mashaba/.test(lower) || /mushaba/.test(stripped)) {
+  if (/client|clients|case stud|getzpharma|power2go|gamenest|game nest|kelectric|electric pole|polekit client|fume hood|it park|collaboration|क्लाइंट|क्लाइंट्स/i.test(lower)) {
+    return "iotfiyclients";
+  }
+  if (/mushaba|moshaba|mashaba|hajj|umrah|pilgrim|haram|kaaba/.test(lower) || /mushaba|hajj|umrah/.test(stripped)) {
     return "mushaba";
+  }
+  if (/mushaba\s*rag|rag\s*mushaba/.test(lower)) {
+    return "mushaba_rag";
   }
   if (/iotfiy\s*solutions|solutions\s*document|iotfiy\s*document|about\s*iotfiy/i.test(lower) ||
     /iotfiysolutions|solutionsdocument|iotfiydocument|aboutiotfiy/.test(stripped)) {
-    return "iotfiy_solutions";
+    return "iotfiy";
   }
   if (/nucleus|vivanco|distribution|cable|vericom|data\s*center/i.test(lower) ||
     /nucleus|distribution/.test(stripped)) {
-    return "nucleus";
+    return "nucleus_distribution";
   }
   return null;
+}
+
+export function inferTopicFromAssistantSpeech(text) {
+  return detectQueryFocus(text);
 }
 
 function debounceRag(sessionId, fn, delayMs = 700) {

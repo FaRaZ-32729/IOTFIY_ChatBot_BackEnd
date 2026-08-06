@@ -772,6 +772,8 @@ export function getPdfSourceCatalog() {
     epsn: "Enterprise Private Social Network (EPSN)",
     iotfiy_gateway: "IOTFIY Gateway (dashboard & widgets product)",
     iotfiy: "IOTFIY General / AI Computer Vision & Company Overview",
+    iotfiyclients: "IOTFIY Clients / case studies (Power2GO, K-Electric, GameNest, GetzPharma, PSO, etc.)",
+    mushaba: "Mushaba (Hajj/Umrah pilgrim companion app)",
     mushaba_rag: "Mushaba Rag (Hajj/Umrah pilgrim navigation)",
     nucleus_vericom: "Nucleus Vericom (cables & networking infrastructure)",
     packtrack: "PackTrack AI logistics automation",
