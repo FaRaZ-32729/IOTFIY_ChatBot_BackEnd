@@ -1702,5 +1702,23 @@
     "pdf_name": "nucleus_vericom",
     "page_number": 26,
     "topic": "NucleusDistributionPvtLtd"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_distribution/nucleusdistributionpvtltd_page_4.png",
+    "pdf_name": "nucleus_distribution",
+    "page_number": 4,
+    "topic": "NucleusDistributionPvtLtd"
+  },
+  {
+    "image_path": "uploads/extracted_images/easy_solar/iotfiyeasysolar_page_1.png",
+    "pdf_name": "easy_solar",
+    "page_number": 1,
+    "topic": "IOTFIYEASYSolar"
+  },
+  {
+    "image_path": "uploads/extracted_images/nucleus_vericom/nucleusdistributionpvtltd_page_28.png",
+    "pdf_name": "nucleus_vericom",
+    "page_number": 28,
+    "topic": "NucleusDistributionPvtLtd"
   }
 ]
