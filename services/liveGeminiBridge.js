@@ -3,6 +3,13 @@
  */
 import { GoogleGenAI, Modality } from "@google/genai";
 import { getConfig } from "../config/keys.js";
+import {
+  getGeminiApiKey,
+  rotateGeminiApiKey,
+  isGeminiQuotaError,
+  maskGeminiApiKey,
+  getGeminiKeyCount,
+} from "../config/geminiKeyPool.js";
 import { saveLead } from "./leadService.js";
 import {
   buildLiveSystemInstruction,
@@ -223,25 +230,59 @@ async function connectLiveSession(ai, preferredModel, config, callbacks) {
     } catch (err) {
       lastError = err;
       console.warn(`   Live model failed (${model}):`, err.message);
+      if (isGeminiQuotaError(err)) throw err;
     }
   }
 
   throw lastError || new Error("No compatible Gemini Live model available");
 }
 
+async function connectLiveWithKeyRotation(preferredModel, liveConfig, callbacks) {
+  const maxAttempts = Math.max(getGeminiKeyCount(), 1);
+  let lastError = null;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const apiKey = getGeminiApiKey();
+    const ai = new GoogleGenAI({ apiKey });
+    try {
+      const { session, model } = await connectLiveSession(
+        ai,
+        preferredModel,
+        liveConfig,
+        callbacks
+      );
+      console.log(
+        `✅ Gemini Live session active (${model}) key=${maskGeminiApiKey(apiKey)}`
+      );
+      return { session, model, ai, apiKey };
+    } catch (err) {
+      lastError = err;
+      if (isGeminiQuotaError(err) && rotateGeminiApiKey(apiKey)) {
+        console.warn(
+          `🔑 Live connect quota — trying next key (${maskGeminiApiKey(getGeminiApiKey())})`
+        );
+        continue;
+      }
+      throw err;
+    }
+  }
+
+  throw lastError || new Error("All Gemini API keys exhausted for Live session");
+}
+
 export async function attachClientToGemini(clientWs, sessionId) {
-  const { GOOGLE_API_KEY, GEMINI_LIVE_MODEL } = getConfig();
-  const ai = new GoogleGenAI({ apiKey: GOOGLE_API_KEY });
+  const { GEMINI_LIVE_MODEL } = getConfig();
 
   // Initialize session stats
   if (!liveSessionStats.has(sessionId)) {
-    // liveSessionStats.set(sessionId, { mushaba_count: 0, nucleus_distribution_count: 0 });
     liveSessionStats.set(sessionId, { topic_counts: {} });
   }
 
   let geminiSession = null;
+  let activeApiKey = getGeminiApiKey();
   let setupDone = false;
   let assistantSpeaking = false;
+  let reconnecting = false;
 
   const liveConfig = {
     responseModalities: [Modality.AUDIO],
@@ -459,9 +500,39 @@ export async function attachClientToGemini(clientWs, sessionId) {
         imagesFocusedThisTurn.delete(sessionId);
       }
     },
-    onerror: (err) => {
+    onerror: async (err) => {
       const msg = err?.message || err?.error?.message || "Gemini Live API error";
       console.error("Gemini Live error:", msg);
+
+      if (!reconnecting && isGeminiQuotaError(err) && rotateGeminiApiKey(activeApiKey)) {
+        reconnecting = true;
+        setupDone = false;
+        try {
+          try {
+            geminiSession?.close();
+          } catch {
+            /* ignore */
+          }
+          const reconnected = await connectLiveWithKeyRotation(
+            GEMINI_LIVE_MODEL,
+            liveConfig,
+            callbacks
+          );
+          geminiSession = reconnected.session;
+          activeApiKey = reconnected.apiKey;
+          sendJson(clientWs, { type: "status", status: "gemini_reconnected" });
+          console.log("🔑 Live session reconnected with rotated Gemini key");
+        } catch (reconnectErr) {
+          sendJson(clientWs, {
+            type: "error",
+            message: reconnectErr?.message || "All Gemini API keys exhausted",
+          });
+        } finally {
+          reconnecting = false;
+        }
+        return;
+      }
+
       sendJson(clientWs, { type: "error", message: msg });
     },
     onclose: (evt) => {
@@ -476,14 +547,13 @@ export async function attachClientToGemini(clientWs, sessionId) {
     },
   };
 
-  const { session, model } = await connectLiveSession(
-    ai,
+  const { session, apiKey } = await connectLiveWithKeyRotation(
     GEMINI_LIVE_MODEL,
     liveConfig,
     callbacks
   );
   geminiSession = session;
-  console.log(`✅ Gemini Live session active (${model})`);
+  activeApiKey = apiKey;
 
   clientWs.on("message", (raw) => {
     try {

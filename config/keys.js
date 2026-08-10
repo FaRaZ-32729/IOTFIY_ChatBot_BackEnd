@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
+import { initGeminiKeyPool, getGeminiApiKey, parseGeminiApiKeysFromEnv } from "./geminiKeyPool.js";
 dotenv.config();
 
 const required = [
   "MONGODB_URI",
-  "GOOGLE_API_KEY",
   "OPENAI_API_KEY",
 ];
 
@@ -47,6 +47,13 @@ export function getConfig() {
     );
   }
 
+  const geminiKeyCount = initGeminiKeyPool();
+  if (!geminiKeyCount) {
+    throw new Error(
+      "Missing Gemini API key(s). Set GOOGLE_API_KEY and/or GOOGLE_API_KEYS in .env"
+    );
+  }
+
   _cached = {
     PORT: process.env.PORT || 5000,
     NODE_ENV: process.env.NODE_ENV || "development",
@@ -56,7 +63,8 @@ export function getConfig() {
       process.env.BACKEND_URL ||
       `http://localhost:${process.env.PORT || 5000}`,
     MONGODB_URI: process.env.MONGODB_URI,
-    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    GOOGLE_API_KEY: getGeminiApiKey(),
+    GOOGLE_API_KEYS: parseGeminiApiKeysFromEnv(process.env),
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     GEMINI_CHAT_MODEL:
       process.env.GEMINI_CHAT_MODEL ||

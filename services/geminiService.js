@@ -12,6 +12,13 @@ import {
 import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
 import { Document } from "@langchain/core/documents";
 import { getConfig } from "../config/keys.js";
+import {
+  getGeminiApiKey,
+  rotateGeminiApiKey,
+  isGeminiQuotaError,
+  maskGeminiApiKey,
+  getGeminiKeyCount,
+} from "../config/geminiKeyPool.js";
 
 /* ───── State ───── */
 let vectorStore = null;
@@ -21,6 +28,8 @@ let imageCatalog = [];
 let imageBaseUrl = "";
 let ragTopK = 2;
 let allChunks = [];
+let cachedPdfChunks = [];
+let cachedImageIndex = {};
 
 
 
@@ -280,6 +289,86 @@ function mergeUniqueDocs(primary, secondary, limit) {
   return merged;
 }
 
+async function buildVectorStore(pdfChunks, apiKey) {
+  const embeddings = new GoogleGenerativeAIEmbeddings({
+    model: "gemini-embedding-001",
+    apiKey,
+  });
+
+  const docs = pdfChunks.map((chunk, idx) =>
+    new Document({
+      pageContent: chunk.text,
+      metadata: {
+        ...(chunk.metadata || {}),
+        chunkIndex: chunk.metadata?.chunkIndex ?? idx,
+      },
+    })
+  );
+
+  return MemoryVectorStore.fromDocuments(docs, embeddings);
+}
+
+async function initializeGeminiClients(apiKey) {
+  const {
+    GEMINI_CHAT_MODEL,
+    GEMINI_CHAT_API_VERSION,
+    GEMINI_API_BASE_URL,
+    GEMINI_MAX_OUTPUT_TOKENS,
+  } = getConfig();
+
+  const chatModelOptions = {
+    model: GEMINI_CHAT_MODEL || "gemini-1.5-flash",
+    apiKey,
+    temperature: 0.35,
+    maxOutputTokens: GEMINI_MAX_OUTPUT_TOKENS,
+    convertSystemMessageToHumanContent: true,
+    apiVersion: GEMINI_CHAT_API_VERSION || "v1beta",
+    ...(GEMINI_API_BASE_URL ? { baseUrl: GEMINI_API_BASE_URL } : {}),
+  };
+
+  console.log("🛠️  Initializing Gemini Chat Model with options:", {
+    ...chatModelOptions,
+    apiKey: "MASKED",
+  });
+
+  chatModel = new ChatGoogleGenerativeAI(chatModelOptions);
+  vectorStore = await buildVectorStore(cachedPdfChunks, apiKey);
+  console.log(
+    `   Vector store ready with ${cachedPdfChunks.length} embedded chunks (key ${maskGeminiApiKey(apiKey)})`
+  );
+}
+
+async function withGeminiKeyRotation(operation, label = "Gemini request") {
+  const maxAttempts = Math.max(getGeminiKeyCount(), 1);
+  let lastError = null;
+
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    const apiKey = getGeminiApiKey();
+    try {
+      return await operation(apiKey);
+    } catch (err) {
+      lastError = err;
+      if (isGeminiQuotaError(err) && rotateGeminiApiKey(apiKey)) {
+        console.warn(`🔑 ${label} quota hit — rotating Gemini key`);
+        if (cachedPdfChunks.length) {
+          await initializeGeminiClients(getGeminiApiKey());
+        }
+        continue;
+      }
+      throw err;
+    }
+  }
+
+  throw lastError || new Error("All Gemini API keys exhausted");
+}
+
+async function similaritySearchWithRotation(query, k) {
+  return withGeminiKeyRotation(async () => {
+    if (!vectorStore) return [];
+    return vectorStore.similaritySearch(query, k);
+  }, "Vector RAG search");
+}
+
 /**
  * RAG retrieval for Live voice sessions — context + slideshow image URLs.
  */
@@ -298,7 +387,7 @@ export async function retrieveContextAndImages(query) {
   let relevantDocs = [];
   let strictDocs = [];
   try {
-    relevantDocs = await vectorStore.similaritySearch(trimmed, k);
+    relevantDocs = await similaritySearchWithRotation(trimmed, k);
     strictDocs = [...relevantDocs];
   } catch (err) {
     console.warn("Vector RAG fallback to keyword search:", err.message);
@@ -345,60 +434,22 @@ export async function retrieveContextAndImages(query) {
  * Called once at server startup after PDF chunks are ready.
  */
 export async function initializeGemini(pdfChunks, imageIndex = {}) {
-  const {
-    GOOGLE_API_KEY,
-    PUBLIC_BASE_URL,
-    GEMINI_CHAT_MODEL,
-    GEMINI_CHAT_API_VERSION,
-    GEMINI_API_BASE_URL,
-    GEMINI_MAX_OUTPUT_TOKENS,
-    GEMINI_RAG_TOP_K,
-  } = getConfig();
+  const { PUBLIC_BASE_URL, GEMINI_RAG_TOP_K } = getConfig();
 
-  pdfImageIndex = imageIndex || {};
+  cachedPdfChunks = Array.isArray(pdfChunks) ? pdfChunks : [];
+  cachedImageIndex = imageIndex || {};
+  pdfImageIndex = cachedImageIndex;
   imageCatalog = buildImageCatalog(pdfImageIndex);
   imageBaseUrl = PUBLIC_BASE_URL || "";
-  allChunks = Array.isArray(pdfChunks) ? pdfChunks : [];
-
-  const chatModelOptions = {
-    model: GEMINI_CHAT_MODEL || "gemini-1.5-flash",
-    apiKey: GOOGLE_API_KEY,
-    temperature: 0.35,
-    maxOutputTokens: GEMINI_MAX_OUTPUT_TOKENS,
-    convertSystemMessageToHumanContent: true,
-    apiVersion: GEMINI_CHAT_API_VERSION || "v1beta",
-    ...(GEMINI_API_BASE_URL ? { baseUrl: GEMINI_API_BASE_URL } : {}),
-  };
-
-  console.log("🛠️  Initializing Gemini Chat Model with options:", {
-    ...chatModelOptions,
-    apiKey: "MASKED",
-  });
+  allChunks = cachedPdfChunks;
 
   ragTopK = Number.isFinite(GEMINI_RAG_TOP_K) && GEMINI_RAG_TOP_K > 0
     ? GEMINI_RAG_TOP_K
     : 2;
 
-  chatModel = new ChatGoogleGenerativeAI(chatModelOptions);
-
-  const embeddings = new GoogleGenerativeAIEmbeddings({
-    model: "gemini-embedding-001",
-    apiKey: GOOGLE_API_KEY,
-  });
-
-  /* Wrap each chunk as a LangChain Document */
-  const docs = pdfChunks.map((chunk, idx) =>
-    new Document({
-      pageContent: chunk.text,
-      metadata: {
-        ...(chunk.metadata || {}),
-        chunkIndex: chunk.metadata?.chunkIndex ?? idx,
-      },
-    })
-  );
-
-  vectorStore = await MemoryVectorStore.fromDocuments(docs, embeddings);
-  console.log(`   Vector store ready with ${docs.length} embedded chunks`);
+  await withGeminiKeyRotation(async (apiKey) => {
+    await initializeGeminiClients(apiKey);
+  }, "Gemini startup");
 }
 
 /**
@@ -438,7 +489,7 @@ export function getAvailablePdfImages() {
  */
 export async function retrieveRelatedImages(query, limit = 8) {
   if (!vectorStore || !query?.trim()) return [];
-  const docs = await vectorStore.similaritySearch(query.trim(), Math.max(ragTopK * 2, 6));
+  const docs = await similaritySearchWithRotation(query.trim(), Math.max(ragTopK * 2, 6));
   return collectImagesForDocs(docs, query, limit).map(formatRelatedImage);
 }
 
