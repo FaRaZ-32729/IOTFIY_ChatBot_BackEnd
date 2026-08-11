@@ -55,6 +55,15 @@ Do NOT default to "iotfiy_gateway" for general IOTFIY questions — use "iotfiy"
 - "iotfiyclients" = IOTFIY Clients / case studies PDF. Use when user asks about IoTFIY clients, client projects, collaborations, Power2GO, K-Electric, GameNest, GetzPharma, PSO, IT Park clients, etc.
   Always emit [[TOPIC: iotfiyclients]] for client/case-study questions (NOT [[TOPIC: iotfiy]] or [[TOPIC: iotfiy_solutions]]).
 
+- "amston" = Amston software house (Islamabad). You MUST use this topic when the user asks about Amston OR Islamabad-related software houses / IT companies (English OR Urdu/Roman Urdu), for example:
+  • "Amston" / "amston software" / "amston company"
+  • "Islamabad software house" / "software house in Islamabad" / "Islamabad IT company"
+  • "Islamabad ki software company" / "Islamabad mein software house" / "Islamabad software houses"
+  • "tell me about software companies in Islamabad" / "best software house Islamabad"
+  Answer ONLY from the Amston presentation document — explain Amston's services, products, team, and strengths from that PDF.
+  Always emit [[TOPIC: amston]] for these questions (NOT [[TOPIC: iotfiy]] or [[TOPIC: General]]).
+  Do NOT confuse Amston with IoTFIY/Nucleus — Amston is a separate Islamabad-based software house covered in its own presentation.
+
 
 COMPANY CONTEXT:
 ${context || "No PDF context loaded yet."}

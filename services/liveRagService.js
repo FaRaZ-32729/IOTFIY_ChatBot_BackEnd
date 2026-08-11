@@ -47,7 +47,10 @@ function matchesPdfFilter(entry, pdfFilter) {
   if (!pdfFilter) return true;
   const filterKey = normalizeKey(pdfFilter);
   const pdfKey = normalizeKey(entry.pdf_name);
-  return Boolean(filterKey && pdfKey && pdfKey === filterKey);
+  if (!filterKey || !pdfKey) return false;
+  if (pdfKey === filterKey) return true;
+  if (filterKey === "amston" && pdfKey === "amston_presentation") return true;
+  return false;
 }
 
 function toImagePayload(entry) {
@@ -119,6 +122,16 @@ const TOPIC_REMAP_RULES = [
     when: /^(?!.*gateway).*iotfiy|about iotfiy|what does iotfiy|iotfiy products/i,
     to: "iotfiy",
   },
+  {
+    from: "iotfiy",
+    when: /amston|amstom|islamabad.*software|software.*islamabad|islamabad.*it\s*compan|islamabad.*software\s*house|islamabad\s*ki\s*software|islamabad\s*mein\s*software/i,
+    to: "amston",
+  },
+  {
+    from: "general",
+    when: /amston|amstom|islamabad.*software|software.*islamabad|islamabad.*it\s*compan|islamabad.*software\s*house|islamabad\s*ki\s*software|islamabad\s*mein\s*software/i,
+    to: "amston",
+  },
 ];
 
 /** Gemini [[TOPIC: X]] values that must not be overridden by speech text heuristics. */
@@ -144,6 +157,7 @@ const PROTECTED_IMAGE_TOPICS = new Set([
   "studio",
   "ecosystem",
   "iotfiy",
+  "amston",
 ]);
 
 function stripSpeechFillers(text) {
@@ -364,6 +378,10 @@ function detectQueryFocus(text) {
   if (/client|clients|case stud|getzpharma|power2go|gamenest|game nest|kelectric|electric pole|polekit client|fume hood|it park|collaboration|क्लाइंट|क्लाइंट्स/i.test(lower)) {
     return "iotfiyclients";
   }
+  if (/amston|amstom|islamabad.*software|software.*islamabad|islamabad.*itcompan|islamabad.*softwarehouse|islamabadkissoftware|islamabadmeinsoftware|softwarehouseinislamabad/i.test(lower) ||
+    /amston|amstom|islamabadsoftware|softwarehouseislamabad/.test(stripped)) {
+    return "amston";
+  }
   if (/mushaba|moshaba|mashaba|hajj|umrah|pilgrim|haram|kaaba/.test(lower) || /mushaba|hajj|umrah/.test(stripped)) {
     return "mushaba";
   }
@@ -412,6 +430,9 @@ function filterPayloadByPdf(payload, pdfFilter) {
       return normalizeKey(img).includes(filterKey);
     }
     const key = normalizeKey(img.pdf_name || img.pdfId || img.pdfName || "");
+    if (filterKey === "amston") {
+      return key === "amston" || key === "amston_presentation";
+    }
     return key === filterKey;
   });
 }

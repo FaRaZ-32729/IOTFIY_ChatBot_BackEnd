@@ -60,7 +60,16 @@ function folderNameFromPdf(displayName) {
   if (name.includes("nucleus") && name.includes("distribution")) {
     return "nucleus_distribution";
   }
+  if (name === "amston" || /^amston[\s_-]?presentation/.test(name) || name === "amstom") {
+    return "amston";
+  }
   return slugify(displayName, "_");
+}
+
+function normalizePdfId(pdfId) {
+  const id = String(pdfId || "").toLowerCase();
+  if (id === "amston_presentation" || id === "amston") return "amston";
+  return id;
 }
 
 function buildRelativeImagePath(pdfFolder, fileName) {
@@ -239,9 +248,15 @@ function loadImageMetadata() {
   if (cachedMetadata) return cachedMetadata;
   const parsed = safeReadJson(METADATA_PATH);
   if (Array.isArray(parsed)) {
-    cachedMetadata = parsed;
+    cachedMetadata = parsed.map((entry) => ({
+      ...entry,
+      pdf_name: normalizePdfId(entry.pdf_name || entry.pdfName),
+    }));
   } else if (parsed && Array.isArray(parsed.images)) {
-    cachedMetadata = parsed.images;
+    cachedMetadata = parsed.images.map((entry) => ({
+      ...entry,
+      pdf_name: normalizePdfId(entry.pdf_name || entry.pdfName),
+    }));
   } else {
     cachedMetadata = [];
   }
@@ -260,7 +275,7 @@ function writeImageMetadata(entries) {
 function buildMetadataIndex(entries) {
   const index = {};
   for (const entry of entries || []) {
-    const pdfName = entry.pdf_name || entry.pdfName;
+    const pdfName = normalizePdfId(entry.pdf_name || entry.pdfName);
     const pageNumber = Number(entry.page_number || entry.pageNumber);
     if (!pdfName || !Number.isFinite(pageNumber)) continue;
     if (!index[pdfName]) index[pdfName] = {};
@@ -572,6 +587,12 @@ async function extractPdfData(pdfPath, metadataState, lastTopicRef) {
 
   console.log(`   Extracted ${pages.length} pages (${pdf.numPages} pages total)`);
 
+  const imageCount = Object.values(imagesByPage).reduce(
+    (sum, page) => sum + (page.images?.length || 0),
+    0
+  );
+  console.log(`   🖼️  ${pdfId}: ${imageCount} slide images`);
+
   return {
     pdfId,
     displayName,
@@ -614,6 +635,8 @@ export async function initializePdfContext() {
       missingPaths.map((entry) => path.basename(entry)).join(", ")
     );
   }
+
+  console.log(`📚 Loading ${existingPaths.length} PDF(s) from disk…`);
 
   ensureDir(IMAGE_ROOT);
   const metadataEntries = loadImageMetadata();
@@ -785,6 +808,10 @@ export function getPdfSourceCatalog() {
     tour: "Mushaba/Pilgrim Navigation Tour features",
     ai_knowledge_assistant:
       "IOTFIY AI Knowledge Assistant (intelligent conversational AI / knowledge-base product)",
+    amston:
+      "Amston (Islamabad software house — company profile & presentation)",
+    amston_teams:
+      "Amston Teams",
   };
 
   return [...map.keys()].map((key) => ({

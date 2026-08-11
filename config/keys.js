@@ -96,19 +96,21 @@ export function getConfig() {
     ENABLE_TTS: process.env.ENABLE_TTS !== "false",
     TTS_TIMEOUT_MS: toPositiveInt(process.env.TTS_TIMEOUT_MS, 3500),
     PDF_PATHS: (() => {
-      if (process.env.PDF_PATHS) {
-        return parsePdfPathList(process.env.PDF_PATHS);
-      }
+      const fromEnv = process.env.PDF_PATHS
+        ? parsePdfPathList(process.env.PDF_PATHS)
+        : process.env.PDF_PATH
+          ? parsePdfPathList(process.env.PDF_PATH)
+          : [];
 
-      if (process.env.PDF_PATH) {
-        const paths = parsePdfPathList(process.env.PDF_PATH);
-        for (const fallback of defaultPdfPaths) {
-          if (!paths.includes(fallback)) paths.push(fallback);
+      const merged = [...fromEnv];
+      for (const fallback of defaultPdfPaths) {
+        const normalized = fallback.replace(/\\/g, "/");
+        if (!merged.some((p) => p.replace(/\\/g, "/") === normalized)) {
+          merged.push(fallback);
         }
-        return paths;
       }
 
-      return [...defaultPdfPaths];
+      return merged.length ? merged : [...defaultPdfPaths];
     })(),
   };
 
